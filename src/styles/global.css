@@ -63,13 +63,20 @@ body {
   -webkit-mask-position: 0% 0%;
 }
 
-/* Animation for auto-shimmer */
-@keyframes shimmer-sweep {
+/* Animation for auto-shimmer - two directions */
+@keyframes shimmer-right {
   0% {
     mask-position: 100% 100%;
     -webkit-mask-position: 100% 100%;
   }
-  50% {
+  100% {
+    mask-position: 0% 0%;
+    -webkit-mask-position: 0% 0%;
+  }
+}
+
+@keyframes shimmer-left {
+  0% {
     mask-position: 0% 0%;
     -webkit-mask-position: 0% 0%;
   }
@@ -79,6 +86,10 @@ body {
   }
 }
 
-.shimmer-overlay.shimmer-auto {
-  animation: shimmer-sweep 7.2s ease-in-out;
+.shimmer-overlay.shimmer-forward {
+  animation: shimmer-right 3.6s ease-in-out forwards;
+}
+
+.shimmer-overlay.shimmer-backward {
+  animation: shimmer-left 3.6s ease-in-out forwards;
 }

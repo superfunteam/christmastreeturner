@@ -339,20 +339,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		const shimmerOverlays = Array.from(document.querySelectorAll('.shimmer-overlay'));
 		let isHovering = false;
 		let currentIndex = 0;
-		let direction = 1; // 1 = forward, -1 = backward
+		let direction = 1; // 1 = forward (left to right), -1 = backward (right to left)
+
+		function getShimmerClass() {
+			return direction === 1 ? 'shimmer-forward' : 'shimmer-backward';
+		}
+
+		function clearShimmerClasses(overlay: Element) {
+			overlay.classList.remove('shimmer-forward', 'shimmer-backward');
+		}
 
 		function triggerNextShimmer() {
 			if (isHovering) {
-				// Wait and try again
 				setTimeout(triggerNextShimmer, 1000);
 				return;
 			}
 
 			const overlay = shimmerOverlays[currentIndex];
 			if (overlay) {
-				overlay.classList.add('shimmer-auto');
+				clearShimmerClasses(overlay);
+				// Force reflow to restart animation
+				void (overlay as HTMLElement).offsetWidth;
+				overlay.classList.add(getShimmerClass());
+
 				overlay.addEventListener('animationend', () => {
-					overlay.classList.remove('shimmer-auto');
+					clearShimmerClasses(overlay);
 
 					// Move to next index
 					currentIndex += direction;
@@ -361,16 +372,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					if (currentIndex >= shimmerOverlays.length) {
 						direction = -1;
 						currentIndex = shimmerOverlays.length - 1;
-						// Pause at the end before reversing
 						setTimeout(triggerNextShimmer, 2000);
 					} else if (currentIndex < 0) {
 						direction = 1;
 						currentIndex = 0;
-						// Pause at the start before going forward again
 						setTimeout(triggerNextShimmer, 2000);
 					} else {
-						// Small delay between consecutive shimmers for smooth wave
-						setTimeout(triggerNextShimmer, 300);
+						// Faster delay between consecutive shimmers
+						setTimeout(triggerNextShimmer, 150);
 					}
 				}, { once: true });
 			}
@@ -380,7 +389,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		shimmerContainers.forEach((container) => {
 			container.addEventListener('mouseenter', () => {
 				isHovering = true;
-				shimmerOverlays.forEach(o => o.classList.remove('shimmer-auto'));
+				shimmerOverlays.forEach(o => clearShimmerClasses(o));
 			});
 			container.addEventListener('mouseleave', () => {
 				isHovering = false;
