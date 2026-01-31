@@ -70,8 +70,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Christmas Tree Turner Overview</h2>
 			<div class="grid md:grid-cols-3 gap-7">
 				<figure class="grid gap-2">
-					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden">
+					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden relative group shimmer-container">
 						<img class="max-w-full max-h-full w-auto h-auto object-contain" src="/images/render-tuner-top.webp" alt="Top view of the base unit." loading="lazy" />
+						<img class="absolute inset-0 max-w-full max-h-full w-auto h-auto object-contain opacity-60 shimmer-overlay" src="/images/render-tuner-top-wire.webp" alt="" loading="lazy" aria-hidden="true" />
 					</div>
 					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">BASE UNIT — heavy cast metal, rotating platform, integrated outlets.</figcaption>
 					<p>
@@ -80,8 +81,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					</p>
 				</figure>
 				<figure class="grid gap-2">
-					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden">
+					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden relative group shimmer-container">
 						<img class="max-w-full max-h-full w-auto h-auto object-contain" src="/images/render-turner-remote.webp" alt="Remote controller with labeled controls." loading="lazy" />
+						<img class="absolute inset-0 max-w-full max-h-full w-auto h-auto object-contain opacity-60 shimmer-overlay" src="/images/render-turner-remote-wire.webp" alt="" loading="lazy" aria-hidden="true" />
 					</div>
 					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">REMOTE CONTROLLER — rotation, lights, music.</figcaption>
 					<p>
@@ -90,8 +92,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					</p>
 				</figure>
 				<figure class="grid gap-2">
-					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden">
+					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden relative group shimmer-container">
 						<img class="max-w-full max-h-full w-auto h-auto object-contain" src="/images/render-tuner-side.webp" alt="Side view of the music mechanism." loading="lazy" />
+						<img class="absolute inset-0 max-w-full max-h-full w-auto h-auto object-contain opacity-60 shimmer-overlay" src="/images/render-tuner-side-wire.webp" alt="" loading="lazy" aria-hidden="true" />
 					</div>
 					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">MUSIC MECHANISM — continuous play during rotation.</figcaption>
 					<p>
@@ -318,6 +321,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			Download Full Size
 		</a>
 	</div>
+
+	<script>
+		// Auto-shimmer effect every 3 seconds
+		const shimmerOverlays = document.querySelectorAll('.shimmer-overlay');
+		let currentShimmerIndex = 0;
+
+		function triggerAutoShimmer() {
+			const overlay = shimmerOverlays[currentShimmerIndex];
+			if (overlay) {
+				overlay.classList.add('shimmer-auto');
+				overlay.addEventListener('animationend', () => {
+					overlay.classList.remove('shimmer-auto');
+				}, { once: true });
+			}
+			currentShimmerIndex = (currentShimmerIndex + 1) % shimmerOverlays.length;
+		}
+
+		// Start auto-shimmer cycle
+		setInterval(triggerAutoShimmer, 3000);
+		// Trigger first one after a short delay
+		setTimeout(triggerAutoShimmer, 1000);
+	</script>
 
 	<script>
 		const lightbox = document.getElementById('lightbox');
