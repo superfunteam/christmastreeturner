@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f8f7f2;
+  --color-text: #0e0e0e;
+  --color-muted: #5c5c5c;
+  --color-border: #1a1a1a;
+  --color-accent: #0f3b2f;
+  --color-well: #f0f0f0;
+
+  --font-serif: "Merriweather", "Times New Roman", Times, serif;
+  --font-display: "Oswald", "Arial Narrow", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+/* Base resets and defaults */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Noise texture background */
+.bg-noise {
+  background-image: url('/textures/noise.svg');
+}

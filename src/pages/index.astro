@@ -1,0 +1,398 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title="Have You Seen Me? — ChristmasTreeTurner.com"
+	description="A public hunt for the origins of a full-size mechanical Christmas Tree Turner."
+>
+	<!-- Film Banner (Fixed) -->
+	<a href="/film" class="fixed top-0 left-0 right-0 z-50 bg-accent text-white py-3 px-6 flex items-center justify-between group">
+		<span class="font-mono text-sm tracking-widest uppercase">Christmas Tree Turner: The Film — Coming Soon...</span>
+		<span class="font-mono text-xs tracking-widest uppercase border border-white/50 px-3 py-1 group-hover:bg-white group-hover:text-accent transition-colors">View</span>
+	</a>
+
+	<!-- Spacer for fixed banner -->
+	<div class="h-12"></div>
+
+	<main id="main-content" class="flex flex-col gap-16">
+		<!-- Hero Section -->
+		<section class="relative overflow-visible">
+			<p class="font-mono uppercase text-xs tracking-widest text-muted mb-3 relative z-20">Help a family recover history</p>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center md:min-h-screen relative">
+				<h1 class="font-display uppercase text-8xl md:text-9xl tracking-wider leading-none m-0 relative z-20">Have You Seen Me?</h1>
+				<div class="relative w-full h-screen min-h-96 overflow-visible bg-transparent pointer-events-none
+				            md:w-auto md:h-screen
+				            md:-mr-32
+				            md:-my-10">
+					<model-viewer
+						class="absolute -top-12 -left-16 w-full h-full scale-75 bg-transparent pointer-events-auto"
+						src="/christmas-tree-turner"
+						alt="3D model of the Christmas Tree Turner."
+						auto-rotate
+						rotation-per-second="8deg"
+						camera-controls
+						camera-orbit="-217deg 55deg 1.2m"
+						min-camera-orbit="auto auto 0.8m"
+						max-camera-orbit="auto auto 2m"
+						poster="/images/photo-turner.jpeg"
+						shadow-intensity="0"
+					></model-viewer>
+					<div class="absolute top-8 right-8 z-10 pointer-events-none">
+						<div class="bg-white border border-border px-3 py-2 w-56 max-w-full font-mono uppercase tracking-widest text-xs text-text shadow-md">
+							Preview render. See full details below.
+						</div>
+					</div>
+					<noscript>
+						<p class="font-mono text-sm tracking-widest uppercase text-muted">3D model requires WebGL. Fallback image displayed.</p>
+					</noscript>
+				</div>
+			</div>
+			<p class="font-display uppercase text-xl tracking-widest mb-8 relative z-20">
+				My mom's full-size mechanical Christmas Tree Turner is missing from history. And we need
+				your help.
+			</p>
+			<div class="grid md:grid-cols-2 gap-8 items-start relative z-20">
+				<div class="grid gap-1 font-mono uppercase tracking-widest text-xs text-muted">
+					<span>FIG. 1a — HEIRLOOM CHRISTMAS TREE SPINNER. MILWAUKEE, WI</span>
+					<span>PATENT NO. 2733032</span>
+					<span>800 WATT / 120V AC</span>
+				</div>
+				<p class="text-lg max-w-prose">
+					My mom remembers lying on her back under this turner, looking up at her Christmas tree.
+					So do I. I grew up hearing that my grandfather "inveted" it. Now we're not sure if
+					that is the case and we <strong class="font-bold">need your help.</strong>
+				</p>
+			</div>
+		</section>
+
+		<!-- Christmas Tree Turner Overview -->
+		<section class="border-t border-border pt-8">
+			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Christmas Tree Turner Overview</h2>
+			<div class="grid md:grid-cols-3 gap-7">
+				<figure class="grid gap-2">
+					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden">
+						<img class="max-w-full max-h-full w-auto h-auto object-contain" src="/images/render-tuner-top.png" alt="Top view of the base unit." loading="lazy" />
+					</div>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">BASE UNIT — heavy cast metal, rotating platform, integrated outlets.</figcaption>
+					<p>
+						The base is a full-size cast metal platform designed to carry a fully decorated
+						Christmas tree while rotating continuously.
+					</p>
+				</figure>
+				<figure class="grid gap-2">
+					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden">
+						<img class="max-w-full max-h-full w-auto h-auto object-contain" src="/images/render-turner-remote.png" alt="Remote controller with labeled controls." loading="lazy" />
+					</div>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">REMOTE CONTROLLER — rotation, lights, music.</figcaption>
+					<p>
+						A wired controller handles rotation speed, light power, and the mechanical music
+						mechanism.
+					</p>
+				</figure>
+				<figure class="grid gap-2">
+					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden">
+						<img class="max-w-full max-h-full w-auto h-auto object-contain" src="/images/render-tuner-side.png" alt="Side view of the music mechanism." loading="lazy" />
+					</div>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">MUSIC MECHANISM — continuous play during rotation.</figcaption>
+					<p>
+						A mechanical music box plays while the tree spins, suggesting a dedicated internal
+						drive system.
+					</p>
+				</figure>
+			</div>
+		</section>
+
+		<!-- Family Letter -->
+		<section class="border-t border-border pt-8">
+			<div class="grid gap-5 bg-white border border-border p-7 shadow-md">
+				<p>
+					<strong class="font-bold">My mom, now 75, still remembers lying beneath a rotating tree as a child.</strong> She would position herself on the carpet, looking straight up, watching the lights pass over her face in slow, hypnotic circles. The ornaments would catch the glow and send little reflections dancing across the ceiling. She says it was the most peaceful feeling in the world.
+				</p>
+				<p>
+					Decades later, I had the exact same experience. The same machine. The same hum. The same gentle turn. I remember the weight of anticipation every December when my dad would bring the Turner up from the basement. It was heavy — <strong class="font-bold">serious cast metal, not some plastic novelty</strong> — and it took two people to carry it. We'd center the tree on the platform, plug everything in, and watch it come to life.
+				</p>
+				<p>
+					The Turner did more than spin. It had:
+				</p>
+				<ul class="pl-5 list-disc grid gap-2">
+					<li>A <strong class="font-bold">rotating platform</strong> strong enough to hold a full-size decorated tree</li>
+					<li><strong class="font-bold">Integrated electrical outlets</strong> that powered the tree lights while spinning</li>
+					<li>A <strong class="font-bold">mechanical music box</strong> that played Christmas carols</li>
+					<li>A wired <strong class="font-bold">remote control</strong> to adjust rotation speed, lights, and music independently</li>
+				</ul>
+				<p>
+					Growing up, I always heard that <strong class="font-bold">my grandfather "invented" this thing</strong>. The story was vague but persistent: he was involved somehow, maybe in the design, maybe in the manufacturing. Milwaukee. The 1950s. A small operation. That was the legend.
+				</p>
+				<p>
+					But legends fade. My grandfather passed away before I was old enough to ask the right questions. My grandmother is gone too. The people who knew the full story are no longer here to tell it. What we have now are fragments:
+				</p>
+				<ul class="pl-5 list-disc grid gap-2">
+					<li>A name: <strong class="font-bold">Air Loom Christmas Tree Spinner</strong></li>
+					<li>A manufacturer: <strong class="font-bold">SpinCraft</strong></li>
+					<li>A city: <strong class="font-bold">Milwaukee, Wisconsin</strong></li>
+					<li>A patent number: <strong class="font-bold">2733032</strong></li>
+					<li>Possible family names: <strong class="font-bold">Ulrich, Ulrich Brothers Manufacturing</strong></li>
+				</ul>
+				<p>
+					We want to know the truth. Was my grandfather really involved? Did he help design it? Did he just work at the factory? Or is this a family myth that got embellished over the years? <strong class="font-bold">We want to document the real history before it disappears completely.</strong>
+				</p>
+				<p>
+					If you can help us find the story — an old advertisement, a patent filing, a newspaper clipping, a photo from the factory floor, anything — <strong class="font-bold">we will honor a teacher or school of your choosing with a donation in your name.</strong> This isn't about money for us. It's about memory. It's about giving my mom an answer before it's too late.
+				</p>
+				<p class="font-mono text-sm uppercase tracking-widest">Signed, Your Name</p>
+			</div>
+		</section>
+
+		<!-- Known Information -->
+		<section class="border-t border-border pt-8">
+			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Known Information</h2>
+			<div class="border border-border p-6 bg-white shadow-lg">
+				<div class="grid gap-3 font-mono uppercase tracking-wider text-sm">
+					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Name</span><span>Air Loom Christmas Tree Spinner</span></div>
+					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Patent</span><span>2733032</span></div>
+					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Manufacturer</span><span>SpinCraft</span></div>
+					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Location</span><span>Milwaukee, Wisconsin</span></div>
+					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Power</span><span>800W / 120V AC</span></div>
+					<div class="grid grid-cols-2 gap-3"><span class="w-36">Use</span><span>Indoor Use Only</span></div>
+				</div>
+
+				<div class="mt-6 pt-6 border-t border-border">
+					<h3 class="font-display uppercase tracking-widest mb-4 text-base">Possible Associations</h3>
+					<ul class="mb-3 pl-5 list-disc grid gap-1 text-sm">
+						<li>Ulrich family</li>
+						<li>Ulrich Brothers Manufacturing (unconfirmed)</li>
+						<li>Tex Trans (unconfirmed)</li>
+						<li>German-American manufacturing background</li>
+					</ul>
+					<p class="italic text-muted text-sm">These are family recollections, not verified facts.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Bounties -->
+		<section class="border-t border-border pt-8">
+			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Bounties</h2>
+			<div class="grid gap-6 grid-cols-1 md:grid-cols-2">
+				<div class="border border-border p-5 bg-white grid gap-3">
+					<div class="text-3xl font-display text-accent">$250</div>
+					<h3 class="font-display uppercase tracking-widest m-0">Print Advertisement</h3>
+					<p>Magazine, newspaper, or catalog reference with publication date.</p>
+					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: archival scan or library reference.</p>
+				</div>
+				<div class="border border-border p-5 bg-white grid gap-3">
+					<div class="text-3xl font-display text-accent">$250</div>
+					<h3 class="font-display uppercase tracking-widest m-0">Patent Documentation</h3>
+					<p>Filing notes, diagrams, or correspondence tied to Patent 2733032.</p>
+					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: primary source documentation.</p>
+				</div>
+				<div class="border border-border p-5 bg-white grid gap-3">
+					<div class="text-3xl font-display text-accent">$500</div>
+					<h3 class="font-display uppercase tracking-widest m-0">Working Unit</h3>
+					<p>Any surviving example of a full-size Christmas Tree Turner in operation.</p>
+					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: photo/video evidence + location.</p>
+				</div>
+				<div class="border border-border p-5 bg-white grid gap-3">
+					<div class="text-3xl font-display text-accent">$500</div>
+					<h3 class="font-display uppercase tracking-widest m-0">Verified Family Connection</h3>
+					<p>Documents tying the Ulrich family to manufacturing or distribution.</p>
+					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: official records or notarized letters.</p>
+				</div>
+			</div>
+			<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">
+				Bounties are paid as donations to a teacher or school of your choosing.
+			</p>
+		</section>
+
+		<!-- Submit a Lead -->
+		<section class="border-t border-border pt-8">
+			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Submit a Lead</h2>
+			<form class="grid gap-4" method="post" enctype="multipart/form-data">
+				<div>
+					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="name">Name</label>
+					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="name" name="name" type="text" autocomplete="name" />
+				</div>
+				<div>
+					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="email">Email</label>
+					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="email" name="email" type="email" autocomplete="email" required />
+				</div>
+				<div>
+					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="details">What You Found</label>
+					<textarea class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="details" name="details" rows="5" required></textarea>
+				</div>
+				<div>
+					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="upload">Upload (optional)</label>
+					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="upload" name="upload" type="file" />
+				</div>
+				<div>
+					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="donation">Preferred Donation Recipient (optional)</label>
+					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="donation" name="donation" type="text" />
+				</div>
+				<div class="hidden" aria-hidden="true">
+					<label for="website">Website</label>
+					<input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+				</div>
+				<button class="border border-border py-3 px-5 bg-accent text-white font-mono uppercase tracking-widest cursor-pointer focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" type="submit">Send Submission</button>
+			</form>
+			<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">We respond to every verified lead.</p>
+		</section>
+
+		<!-- Gallery -->
+		<section class="border-t border-border pt-8">
+			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Gallery</h2>
+			<div class="grid gap-5 grid-cols-2 md:grid-cols-3">
+				<figure class="grid gap-2">
+					<button type="button" class="cursor-zoom-in border-0 p-0 bg-transparent" data-lightbox="/images/photo-turner.jpeg" data-alt="Main view of the Turner.">
+						<img class="block max-w-full h-auto transition-opacity hover:opacity-80" src="/images/photo-turner.jpeg" alt="Main view of the Turner." loading="lazy" />
+					</button>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">FIG. 2 — MAIN UNIT</figcaption>
+				</figure>
+				<figure class="grid gap-2">
+					<button type="button" class="cursor-zoom-in border-0 p-0 bg-transparent" data-lightbox="/images/photo-turner-bottom.jpeg" data-alt="Underside closeup of the Turner.">
+						<img class="block max-w-full h-auto transition-opacity hover:opacity-80" src="/images/photo-turner-bottom.jpeg" alt="Underside closeup of the Turner." loading="lazy" />
+					</button>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">FIG. 3 — UNDERSIDE</figcaption>
+				</figure>
+				<figure class="grid gap-2">
+					<button type="button" class="cursor-zoom-in border-0 p-0 bg-transparent" data-lightbox="/images/photo-turner-control.jpeg" data-alt="Control panel closeup.">
+						<img class="block max-w-full h-auto transition-opacity hover:opacity-80" src="/images/photo-turner-control.jpeg" alt="Control panel closeup." loading="lazy" />
+					</button>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">FIG. 4 — CONTROL PANEL</figcaption>
+				</figure>
+				<figure class="grid gap-2">
+					<button type="button" class="cursor-zoom-in border-0 p-0 bg-transparent" data-lightbox="/images/render-turner-bottom.png" data-alt="Rendered underside view.">
+						<img class="block max-w-full h-auto transition-opacity hover:opacity-80" src="/images/render-turner-bottom.png" alt="Rendered underside view." loading="lazy" />
+					</button>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">FIG. 5 — RENDERED UNDERSIDE</figcaption>
+				</figure>
+				<figure class="grid gap-2">
+					<button type="button" class="cursor-zoom-in border-0 p-0 bg-transparent" data-lightbox="/images/render-turner-logos.png" data-alt="Rendered label and logo detail.">
+						<img class="block max-w-full h-auto transition-opacity hover:opacity-80" src="/images/render-turner-logos.png" alt="Rendered label and logo detail." loading="lazy" />
+					</button>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">FIG. 6 — LABEL DETAIL</figcaption>
+				</figure>
+				<figure class="grid gap-2">
+					<button type="button" class="cursor-zoom-in border-0 p-0 bg-transparent" data-lightbox="/images/render-turner-remote.png" data-alt="Rendered remote controller.">
+						<img class="block max-w-full h-auto transition-opacity hover:opacity-80" src="/images/render-turner-remote.png" alt="Rendered remote controller." loading="lazy" />
+					</button>
+					<figcaption class="font-mono text-xs uppercase tracking-widest text-muted">FIG. 7 — REMOTE CONTROLLER</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<!-- Updates / Findings Log -->
+		<section class="border-t border-border pt-8">
+			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Updates / Findings Log</h2>
+			<div class="grid gap-4">
+				<div class="grid gap-1 border-b border-border pb-3">
+					<span class="font-mono text-sm uppercase tracking-widest">JAN 22, 2026</span>
+					<span>SpinCraft name confirmed on original label.</span>
+				</div>
+				<div class="grid gap-1 border-b border-border pb-3">
+					<span class="font-mono text-sm uppercase tracking-widest">JAN 14, 2026</span>
+					<span>Patent number 2733032 discovered.</span>
+				</div>
+				<div class="grid gap-1 border-b border-border pb-3">
+					<span class="font-mono text-sm uppercase tracking-widest">DEC 30, 2025</span>
+					<span>Full catalog of photographs and renders completed.</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="border-t border-border pt-8">
+			<p class="font-mono text-sm tracking-widest uppercase text-muted">
+				This is a personal historical research project. No commercial use intended.
+			</p>
+		</footer>
+	</main>
+
+	<!-- Lightbox -->
+	<div id="lightbox" class="fixed inset-0 z-50 bg-black/90 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center" aria-hidden="true">
+		<button id="lightbox-close" type="button" class="absolute top-4 right-4 w-12 h-12 flex items-center justify-center text-white text-3xl bg-transparent border-0 cursor-pointer hover:text-white/70 transition-colors z-10" aria-label="Close lightbox">
+			&times;
+		</button>
+		<div id="lightbox-container" class="relative max-w-screen-lg max-h-screen overflow-hidden">
+			<img id="lightbox-img" src="" alt="" class="max-w-full max-h-screen object-contain transition-transform duration-200 cursor-zoom-in" />
+		</div>
+		<a id="lightbox-download" href="" download class="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-3 bg-white text-text font-mono uppercase tracking-widest text-xs border border-border hover:bg-bg transition-colors">
+			Download Full Size
+		</a>
+	</div>
+
+	<script>
+		const lightbox = document.getElementById('lightbox');
+		const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+		const lightboxClose = document.getElementById('lightbox-close');
+		const lightboxDownload = document.getElementById('lightbox-download') as HTMLAnchorElement;
+		const lightboxContainer = document.getElementById('lightbox-container');
+
+		let isZoomed = false;
+		let currentSrc = '';
+
+		// Open lightbox
+		document.querySelectorAll('[data-lightbox]').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const src = btn.getAttribute('data-lightbox') || '';
+				const alt = btn.getAttribute('data-alt') || '';
+				currentSrc = src;
+				lightboxImg.src = src;
+				lightboxImg.alt = alt;
+				lightboxDownload.href = src;
+				lightbox?.classList.remove('opacity-0', 'pointer-events-none');
+				lightbox?.setAttribute('aria-hidden', 'false');
+				document.body.style.overflow = 'hidden';
+				isZoomed = false;
+				lightboxImg.style.transform = 'scale(1)';
+				lightboxImg.classList.remove('cursor-zoom-out');
+				lightboxImg.classList.add('cursor-zoom-in');
+			});
+		});
+
+		// Close lightbox
+		function closeLightbox() {
+			lightbox?.classList.add('opacity-0', 'pointer-events-none');
+			lightbox?.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
+			isZoomed = false;
+		}
+
+		lightboxClose?.addEventListener('click', closeLightbox);
+
+		lightbox?.addEventListener('click', (e) => {
+			if (e.target === lightbox) {
+				closeLightbox();
+			}
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && !lightbox?.classList.contains('opacity-0')) {
+				closeLightbox();
+			}
+		});
+
+		// Zoom functionality
+		lightboxImg?.addEventListener('click', (e) => {
+			e.stopPropagation();
+			isZoomed = !isZoomed;
+			if (isZoomed) {
+				lightboxImg.style.transform = 'scale(2)';
+				lightboxImg.classList.remove('cursor-zoom-in');
+				lightboxImg.classList.add('cursor-zoom-out');
+			} else {
+				lightboxImg.style.transform = 'scale(1)';
+				lightboxImg.classList.remove('cursor-zoom-out');
+				lightboxImg.classList.add('cursor-zoom-in');
+			}
+		});
+
+		// Pan when zoomed
+		lightboxContainer?.addEventListener('mousemove', (e) => {
+			if (!isZoomed) return;
+			const rect = lightboxContainer.getBoundingClientRect();
+			const x = (e.clientX - rect.left) / rect.width;
+			const y = (e.clientY - rect.top) / rect.height;
+			lightboxImg.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+		});
+	</script>
+</BaseLayout>

@@ -1,0 +1,287 @@
+---
+// Film teaser page - terminal style
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Christmas Tree Turner: The Film — Coming Soon" />
+		<title>Christmas Tree Turner: The Film</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400&display=swap" />
+		<style>
+			:root {
+				--bg: #050505;
+				--green: #39FF14;
+				--glow: rgba(57, 255, 20, 0.35);
+			}
+
+			*, *::before, *::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			html, body {
+				height: 100%;
+				background: var(--bg);
+				color: var(--green);
+				font-family: 'VT323', 'IBM Plex Mono', monospace;
+				overflow: hidden;
+			}
+
+			/* Scanlines overlay */
+			body::before {
+				content: '';
+				position: fixed;
+				inset: 0;
+				background: repeating-linear-gradient(
+					to bottom,
+					rgba(0, 0, 0, 0.15) 0px,
+					rgba(0, 0, 0, 0.15) 1px,
+					rgba(0, 0, 0, 0) 2px,
+					rgba(0, 0, 0, 0) 3px
+				);
+				pointer-events: none;
+				z-index: 100;
+			}
+
+			/* CRT vignette */
+			body::after {
+				content: '';
+				position: fixed;
+				inset: 0;
+				background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+				pointer-events: none;
+				z-index: 99;
+			}
+
+			.terminal {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 2rem;
+				padding-top: 10vh;
+			}
+
+			.content {
+				max-width: 720px;
+				width: 100%;
+				text-shadow:
+					0 0 4px rgba(57, 255, 20, 0.6),
+					0 0 12px rgba(57, 255, 20, 0.4);
+			}
+
+			.title {
+				font-size: clamp(32px, 8vw, 64px);
+				line-height: 1.1;
+				margin-bottom: 0.5em;
+				letter-spacing: 0.05em;
+			}
+
+			.subtitle {
+				font-size: clamp(24px, 5vw, 32px);
+				margin-bottom: 2em;
+				opacity: 0.9;
+			}
+
+			.credits {
+				font-size: clamp(18px, 4vw, 24px);
+				line-height: 1.8;
+			}
+
+			.credits .name {
+				display: block;
+			}
+
+			.credits .role {
+				display: block;
+				opacity: 0.6;
+				font-size: 0.85em;
+				margin-bottom: 1em;
+			}
+
+			.meta {
+				margin-top: 2em;
+				font-size: clamp(16px, 3vw, 20px);
+				opacity: 0.7;
+				line-height: 1.6;
+			}
+
+			.cursor {
+				display: inline-block;
+				width: 0.6em;
+				height: 1.1em;
+				background: var(--green);
+				margin-left: 2px;
+				vertical-align: text-bottom;
+				animation: blink 600ms step-end infinite;
+			}
+
+			@keyframes blink {
+				50% { opacity: 0; }
+			}
+
+			/* Flicker animation */
+			@keyframes flicker {
+				0%, 100% { opacity: 1; }
+				50% { opacity: 0.97; }
+			}
+
+			.flicker {
+				animation: flicker 80ms ease-in-out;
+			}
+
+			/* Back link */
+			.back-link {
+				position: fixed;
+				bottom: 2rem;
+				left: 2rem;
+				color: var(--green);
+				text-decoration: none;
+				font-size: 18px;
+				opacity: 0.6;
+				transition: opacity 0.2s, text-shadow 0.2s;
+				text-shadow: 0 0 4px rgba(57, 255, 20, 0.4);
+			}
+
+			.back-link:hover {
+				opacity: 1;
+				text-shadow:
+					0 0 4px rgba(57, 255, 20, 0.8),
+					0 0 16px rgba(57, 255, 20, 0.6);
+			}
+
+			/* Hidden until typed */
+			.typed-content {
+				visibility: hidden;
+			}
+
+			.typed-content.visible {
+				visibility: visible;
+			}
+
+			/* Reduced motion */
+			@media (prefers-reduced-motion: reduce) {
+				.cursor {
+					animation: none;
+					opacity: 1;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="terminal">
+			<div class="content">
+				<div id="output"></div>
+				<span id="cursor" class="cursor" style="display: none;"></span>
+			</div>
+		</div>
+
+		<a href="/" class="back-link">← Return to main site</a>
+
+		<script>
+			const lines = [
+				{ text: 'CHRISTMAS TREE TURNER: THE FILM', class: 'title' },
+				{ text: 'COMING SOON', class: 'subtitle' },
+				{ text: '', class: 'spacer' },
+				{ text: 'Brandon Gray', class: 'name' },
+				{ text: 'Director', class: 'role' },
+				{ text: 'Matt Manchester', class: 'name' },
+				{ text: 'Host', class: 'role' },
+				{ text: 'Clark Wimberly', class: 'name' },
+				{ text: 'Host', class: 'role' },
+				{ text: 'Al', class: 'name' },
+				{ text: 'Electrician', class: 'role' },
+				{ text: 'David Decoster', class: 'name' },
+				{ text: 'Artist', class: 'role' },
+				{ text: '', class: 'spacer' },
+				{ text: 'Filming: February / March / April', class: 'meta' },
+				{ text: 'Target Release: July', class: 'meta' },
+			];
+
+			const output = document.getElementById('output');
+			const cursor = document.getElementById('cursor');
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			// Random timing for organic feel
+			function randomBetween(min: number, max: number): number {
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+
+			// Flicker effect
+			function triggerFlicker(): void {
+				if (prefersReducedMotion) return;
+				document.body.classList.add('flicker');
+				setTimeout(() => document.body.classList.remove('flicker'), 80);
+				setTimeout(triggerFlicker, randomBetween(3000, 8000));
+			}
+
+			// Type a single character
+			async function typeChar(element: HTMLElement, char: string): Promise<void> {
+				return new Promise(resolve => {
+					element.textContent += char;
+					const delay = char === ' ' ? randomBetween(40, 80) : randomBetween(30, 60);
+					setTimeout(resolve, prefersReducedMotion ? 0 : delay);
+				});
+			}
+
+			// Type a full line
+			async function typeLine(text: string, className: string): Promise<void> {
+				if (className === 'spacer') {
+					const br = document.createElement('br');
+					output?.appendChild(br);
+					return;
+				}
+
+				const wrapper = document.createElement('div');
+				wrapper.className = 'credits';
+
+				const span = document.createElement('span');
+				span.className = className;
+				wrapper.appendChild(span);
+				output?.appendChild(wrapper);
+
+				if (prefersReducedMotion) {
+					span.textContent = text;
+				} else {
+					for (const char of text) {
+						await typeChar(span, char);
+					}
+				}
+			}
+
+			// Main typing sequence
+			async function typeAll(): Promise<void> {
+				for (let i = 0; i < lines.length; i++) {
+					const line = lines[i];
+					await typeLine(line.text, line.class);
+
+					if (!prefersReducedMotion && line.class !== 'spacer') {
+						await new Promise(resolve => setTimeout(resolve, randomBetween(400, 700)));
+					}
+				}
+
+				// Show cursor at end
+				if (cursor) {
+					cursor.style.display = 'inline-block';
+				}
+			}
+
+			// Start
+			setTimeout(() => {
+				typeAll();
+				if (!prefersReducedMotion) {
+					setTimeout(triggerFlicker, randomBetween(3000, 8000));
+				}
+			}, 500);
+		</script>
+	</body>
+</html>
