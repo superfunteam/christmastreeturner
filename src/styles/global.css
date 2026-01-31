@@ -53,7 +53,7 @@ body {
   );
   -webkit-mask-size: 300% 300%;
   -webkit-mask-position: 100% 100%;
-  transition: mask-position 1.8s ease-out, -webkit-mask-position 1.8s ease-out;
+  transition: mask-position 3.6s ease-out, -webkit-mask-position 3.6s ease-out;
 }
 
 /* Hover triggers shimmer */
@@ -80,5 +80,5 @@ body {
 }
 
 .shimmer-overlay.shimmer-auto {
-  animation: shimmer-sweep 3.6s ease-in-out;
+  animation: shimmer-sweep 7.2s ease-in-out;
 }
