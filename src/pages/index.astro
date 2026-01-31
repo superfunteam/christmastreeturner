@@ -334,8 +334,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	</div>
 
 	<script>
-		// Cascading shimmer effect - wave across all objects, then reverse
+		// Cascading shimmer effect - wave across all objects with 1s overlap
 		const shimmerOverlays = Array.from(document.querySelectorAll('.shimmer-overlay'));
+		const ANIMATION_DURATION = 3600; // 3.6s in ms
+		const OVERLAP = 1000; // 1s overlap
+		const DELAY_BETWEEN = ANIMATION_DURATION - OVERLAP; // 2.6s
 		let currentIndex = 0;
 		let direction = 1; // 1 = forward, -1 = backward
 
@@ -347,33 +350,37 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			overlay.classList.remove('shimmer-forward', 'shimmer-backward');
 		}
 
-		function triggerNextShimmer() {
+		function triggerShimmer() {
 			const overlay = shimmerOverlays[currentIndex];
 			if (overlay) {
 				clearShimmerClasses(overlay);
 				void (overlay as HTMLElement).offsetWidth;
 				overlay.classList.add(getShimmerClass());
 
-				overlay.addEventListener('animationend', () => {
-					clearShimmerClasses(overlay);
-					currentIndex += direction;
+				// Clean up after animation completes
+				setTimeout(() => clearShimmerClasses(overlay), ANIMATION_DURATION);
 
-					if (currentIndex >= shimmerOverlays.length) {
-						direction = -1;
-						currentIndex = shimmerOverlays.length - 1;
-						setTimeout(triggerNextShimmer, 2000);
-					} else if (currentIndex < 0) {
-						direction = 1;
-						currentIndex = 0;
-						setTimeout(triggerNextShimmer, 2000);
-					} else {
-						triggerNextShimmer();
-					}
-				}, { once: true });
+				// Schedule next shimmer with overlap
+				currentIndex += direction;
+
+				if (currentIndex >= shimmerOverlays.length) {
+					direction = -1;
+					currentIndex = shimmerOverlays.length - 1;
+					// Wait for last animation to finish + pause
+					setTimeout(triggerShimmer, ANIMATION_DURATION + 1000);
+				} else if (currentIndex < 0) {
+					direction = 1;
+					currentIndex = 0;
+					// Wait for last animation to finish + pause
+					setTimeout(triggerShimmer, ANIMATION_DURATION + 1000);
+				} else {
+					// Overlap by 1s
+					setTimeout(triggerShimmer, DELAY_BETWEEN);
+				}
 			}
 		}
 
-		setTimeout(triggerNextShimmer, 1500);
+		setTimeout(triggerShimmer, 1500);
 	</script>
 
 	<script>
