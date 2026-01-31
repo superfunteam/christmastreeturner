@@ -59,8 +59,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				</div>
 				<p class="text-lg max-w-prose">
 					My mom remembers lying on her back under this turner, looking up at her Christmas tree.
-					So do I. I grew up hearing that my grandfather "inveted" it. Now we're not sure if
-					that is the case and we <strong class="font-bold">need your help.</strong>
+					So do I. I grew up hearing that my grandfather "invented" it. Now we're not sure if
+					that is the case and we <strong class="font-bold">need your help.</strong> Every verified lead earns a donation to a teacher or school of your choosing.
 				</p>
 			</div>
 		</section>
@@ -181,30 +181,35 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<!-- Bounties -->
 		<section class="border-t border-border pt-8">
 			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Bounties</h2>
+			<p class="text-lg mb-6 max-w-prose">Help us solve this mystery and we'll make a donation to a teacher or school you choose. No cash to you — just the satisfaction of helping preserve history and supporting education.</p>
 			<div class="grid gap-6 grid-cols-1 md:grid-cols-2">
 				<div class="border border-border p-5 bg-white grid gap-3">
 					<div class="text-3xl font-display text-accent">$250</div>
 					<h3 class="font-display uppercase tracking-widest m-0">Print Advertisement</h3>
 					<p>Magazine, newspaper, or catalog reference with publication date.</p>
 					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: archival scan or library reference.</p>
+					<p class="text-sm text-accent">→ Donated to your chosen teacher or school</p>
 				</div>
 				<div class="border border-border p-5 bg-white grid gap-3">
 					<div class="text-3xl font-display text-accent">$250</div>
 					<h3 class="font-display uppercase tracking-widest m-0">Patent Documentation</h3>
 					<p>Filing notes, diagrams, or correspondence tied to Patent 2733032.</p>
 					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: primary source documentation.</p>
+					<p class="text-sm text-accent">→ Donated to your chosen teacher or school</p>
 				</div>
 				<div class="border border-border p-5 bg-white grid gap-3">
 					<div class="text-3xl font-display text-accent">$500</div>
 					<h3 class="font-display uppercase tracking-widest m-0">Working Unit</h3>
 					<p>Any surviving example of a full-size Christmas Tree Turner in operation.</p>
 					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: photo/video evidence + location.</p>
+					<p class="text-sm text-accent">→ Donated to your chosen teacher or school</p>
 				</div>
 				<div class="border border-border p-5 bg-white grid gap-3">
 					<div class="text-3xl font-display text-accent">$500</div>
 					<h3 class="font-display uppercase tracking-widest m-0">Verified Family Connection</h3>
 					<p>Documents tying the Ulrich family to manufacturing or distribution.</p>
 					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: official records or notarized letters.</p>
+					<p class="text-sm text-accent">→ Donated to your chosen teacher or school</p>
 				</div>
 			</div>
 			<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">
@@ -233,7 +238,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="upload" name="upload" type="file" />
 				</div>
 				<div>
-					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="donation">Preferred Donation Recipient (optional)</label>
+					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="donation">Teacher or School to Receive Donation (optional)</label>
 					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="donation" name="donation" type="text" />
 				</div>
 				<div class="hidden" aria-hidden="true">
@@ -242,7 +247,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				</div>
 				<button class="border border-border py-3 px-5 bg-accent text-white font-mono uppercase tracking-widest cursor-pointer focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" type="submit">Send Submission</button>
 			</form>
-			<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">We respond to every verified lead.</p>
+			<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">We respond to every verified lead. Verified submissions earn donations to teachers and schools — not cash to you.</p>
 		</section>
 
 		<!-- Gallery -->
