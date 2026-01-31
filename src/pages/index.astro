@@ -334,31 +334,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	</div>
 
 	<script>
-		// Auto-shimmer effect every 3 seconds (one at a time)
+		// Cascading shimmer effect - wave across all objects, then reverse
 		const shimmerContainers = document.querySelectorAll('.shimmer-container');
-		const shimmerOverlays = document.querySelectorAll('.shimmer-overlay');
-		let currentShimmerIndex = 0;
+		const shimmerOverlays = Array.from(document.querySelectorAll('.shimmer-overlay'));
 		let isHovering = false;
-		let shimmerInterval: ReturnType<typeof setInterval>;
+		let currentIndex = 0;
+		let direction = 1; // 1 = forward, -1 = backward
 
-		function triggerAutoShimmer() {
-			if (isHovering) return;
+		function triggerNextShimmer() {
+			if (isHovering) {
+				// Wait and try again
+				setTimeout(triggerNextShimmer, 1000);
+				return;
+			}
 
-			const overlay = shimmerOverlays[currentShimmerIndex];
+			const overlay = shimmerOverlays[currentIndex];
 			if (overlay) {
 				overlay.classList.add('shimmer-auto');
 				overlay.addEventListener('animationend', () => {
 					overlay.classList.remove('shimmer-auto');
+
+					// Move to next index
+					currentIndex += direction;
+
+					// Reverse direction at ends
+					if (currentIndex >= shimmerOverlays.length) {
+						direction = -1;
+						currentIndex = shimmerOverlays.length - 1;
+						// Pause at the end before reversing
+						setTimeout(triggerNextShimmer, 2000);
+					} else if (currentIndex < 0) {
+						direction = 1;
+						currentIndex = 0;
+						// Pause at the start before going forward again
+						setTimeout(triggerNextShimmer, 2000);
+					} else {
+						// Small delay between consecutive shimmers for smooth wave
+						setTimeout(triggerNextShimmer, 300);
+					}
 				}, { once: true });
 			}
-			currentShimmerIndex = (currentShimmerIndex + 1) % shimmerOverlays.length;
 		}
 
 		// Pause auto-shimmer on hover
-		shimmerContainers.forEach((container, index) => {
+		shimmerContainers.forEach((container) => {
 			container.addEventListener('mouseenter', () => {
 				isHovering = true;
-				// Remove any active auto-shimmer
 				shimmerOverlays.forEach(o => o.classList.remove('shimmer-auto'));
 			});
 			container.addEventListener('mouseleave', () => {
@@ -366,10 +387,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			});
 		});
 
-		// Start auto-shimmer cycle
-		shimmerInterval = setInterval(triggerAutoShimmer, 3000);
-		// Trigger first one after a short delay
-		setTimeout(triggerAutoShimmer, 1000);
+		// Start the cascade after a short delay
+		setTimeout(triggerNextShimmer, 1500);
 	</script>
 
 	<script>
