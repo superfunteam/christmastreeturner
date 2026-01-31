@@ -7,9 +7,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	description="A public hunt for the origins of a full-size mechanical Christmas Tree Turner."
 >
 	<!-- Film Banner (Fixed) -->
-	<a href="/film" class="fixed top-0 left-0 right-0 z-50 bg-accent text-white py-3 px-6 flex items-center justify-between group">
-		<span class="font-mono text-sm tracking-widest uppercase">Christmas Tree Turner: The Film — Coming Soon...</span>
-		<span class="font-mono text-xs tracking-widest uppercase border border-white/50 px-3 py-1 group-hover:bg-white group-hover:text-accent transition-colors">View</span>
+	<a href="/film" class="fixed top-0 left-0 right-0 z-50 bg-accent text-white py-2 px-4 md:px-6 flex items-center justify-between gap-3 group">
+		<span class="font-mono text-xs tracking-wider uppercase">Christmas Tree Turner: The Film — Coming Soon...</span>
+		<span class="font-mono text-xs tracking-wider uppercase border border-white/50 px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-accent transition-colors">View</span>
 	</a>
 
 	<!-- Spacer for fixed banner -->
@@ -18,9 +18,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	<main id="main-content" class="flex flex-col gap-16">
 		<!-- Hero Section -->
 		<section class="relative overflow-visible">
-			<p class="font-mono uppercase text-xs tracking-widest text-muted mb-3 relative z-20">Help a family recover history</p>
+			<p class="font-mono uppercase text-xs tracking-widest text-muted mt-8 mb-3 relative z-20">Help a family recover history</p>
 			<div class="grid grid-cols-1 gap-8 items-center md:min-h-screen relative overflow-visible">
-				<h1 class="font-display uppercase text-8xl md:text-9xl tracking-wider leading-none m-0 relative z-20 md:max-w-xl">Have You Seen Me?</h1>
+				<h1 class="font-display uppercase text-7xl md:text-[12rem] tracking-wider leading-none m-0 relative z-20 md:max-w-3xl">Have You Seen Me?</h1>
 				<div class="relative w-full h-96 overflow-visible bg-transparent pointer-events-none
 				            md:absolute md:top-0 md:right-0 md:w-3/5 md:h-full md:-mr-32">
 					<model-viewer
@@ -37,8 +37,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 						poster="/images/photo-turner.jpeg"
 						shadow-intensity="0"
 					></model-viewer>
-					<div class="absolute top-8 right-8 z-10 pointer-events-none">
-						<div class="bg-white border border-border px-3 py-2 w-56 max-w-full font-mono uppercase tracking-widest text-xs text-text shadow-md">
+					<div class="absolute top-4 right-4 md:top-8 md:right-8 z-10 pointer-events-none">
+						<div class="bg-white border border-border px-2 py-1 md:px-3 md:py-2 w-40 md:w-56 font-mono uppercase tracking-wider text-xs text-text shadow-md">
 							Preview render. See full details below.
 						</div>
 					</div>
