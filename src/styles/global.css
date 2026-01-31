@@ -56,12 +56,6 @@ body {
   transition: mask-position 3.6s ease-out, -webkit-mask-position 3.6s ease-out;
 }
 
-/* Hover triggers shimmer */
-.shimmer-container:hover .shimmer-overlay,
-.shimmer-overlay.shimmer-active {
-  mask-position: 0% 0%;
-  -webkit-mask-position: 0% 0%;
-}
 
 /* Animation for auto-shimmer - two directions */
 @keyframes shimmer-right {

@@ -335,11 +335,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 	<script>
 		// Cascading shimmer effect - wave across all objects, then reverse
-		const shimmerContainers = document.querySelectorAll('.shimmer-container');
 		const shimmerOverlays = Array.from(document.querySelectorAll('.shimmer-overlay'));
-		let isHovering = false;
 		let currentIndex = 0;
-		let direction = 1; // 1 = forward (left to right), -1 = backward (right to left)
+		let direction = 1; // 1 = forward, -1 = backward
 
 		function getShimmerClass() {
 			return direction === 1 ? 'shimmer-forward' : 'shimmer-backward';
@@ -350,25 +348,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		}
 
 		function triggerNextShimmer() {
-			if (isHovering) {
-				setTimeout(triggerNextShimmer, 1000);
-				return;
-			}
-
 			const overlay = shimmerOverlays[currentIndex];
 			if (overlay) {
 				clearShimmerClasses(overlay);
-				// Force reflow to restart animation
 				void (overlay as HTMLElement).offsetWidth;
 				overlay.classList.add(getShimmerClass());
 
 				overlay.addEventListener('animationend', () => {
 					clearShimmerClasses(overlay);
-
-					// Move to next index
 					currentIndex += direction;
 
-					// Reverse direction at ends
 					if (currentIndex >= shimmerOverlays.length) {
 						direction = -1;
 						currentIndex = shimmerOverlays.length - 1;
@@ -378,25 +367,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 						currentIndex = 0;
 						setTimeout(triggerNextShimmer, 2000);
 					} else {
-						// Faster delay between consecutive shimmers
-						setTimeout(triggerNextShimmer, 150);
+						triggerNextShimmer();
 					}
 				}, { once: true });
 			}
 		}
 
-		// Pause auto-shimmer on hover
-		shimmerContainers.forEach((container) => {
-			container.addEventListener('mouseenter', () => {
-				isHovering = true;
-				shimmerOverlays.forEach(o => clearShimmerClasses(o));
-			});
-			container.addEventListener('mouseleave', () => {
-				isHovering = false;
-			});
-		});
-
-		// Start the cascade after a short delay
 		setTimeout(triggerNextShimmer, 1500);
 	</script>
 
