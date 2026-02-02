@@ -18,7 +18,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	<main id="main-content" class="flex flex-col gap-16">
 		<!-- Hero Section -->
 		<section class="relative overflow-visible">
-			<p class="font-mono uppercase text-xs tracking-widest text-muted mt-8 mb-3 relative z-20">Help a family recover history</p>
+			<p class="font-mono uppercase text-xs tracking-widest text-muted mt-8 mb-3 relative z-20">Help a Texas family recover history</p>
 			<div class="grid grid-cols-1 gap-8 items-center md:min-h-screen relative overflow-visible">
 				<h1 class="font-display uppercase text-7xl md:text-[12rem] tracking-wider leading-none m-0 relative z-20 md:max-w-3xl">Have You Seen Me?</h1>
 				<div class="relative w-full h-96 overflow-visible bg-transparent pointer-events-none
@@ -41,31 +41,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 							<div class="w-12 h-12 border-2 border-border border-t-accent rounded-full animate-spin"></div>
 						</div>
 					</model-viewer>
-					<div class="absolute top-4 right-4 md:top-8 md:right-8 z-10 pointer-events-none">
-						<div class="bg-white border border-border px-2 py-1 md:px-3 md:py-2 w-40 md:w-56 font-mono uppercase tracking-wider text-xs text-text shadow-md">
-							Preview render. See full details below.
-						</div>
-					</div>
 					<noscript>
 						<p class="font-mono text-sm tracking-widest uppercase text-muted">3D model requires WebGL. Fallback image displayed.</p>
 					</noscript>
 				</div>
+				<!-- Label positioned relative to the grid, not the overflowing model container -->
+				<div class="absolute top-4 right-4 md:top-8 md:right-8 z-30 pointer-events-none">
+					<div class="bg-white border border-border px-2 py-1 md:px-3 md:py-2 w-40 md:w-56 font-mono uppercase tracking-wider text-xs text-text shadow-md">
+						Preview render. See full details below.
+					</div>
+				</div>
 			</div>
-			<p class="font-display uppercase text-xl tracking-widest mt-12 mb-8 relative z-20">
+			<p class="font-display uppercase text-2xl md:text-4xl tracking-widest mt-12 mb-8 relative z-20">
 				My mom's full-size mechanical Christmas Tree Turner is missing from history. And we need
 				your help.
 			</p>
 			<div class="grid md:grid-cols-2 gap-8 items-start relative z-20">
-				<div class="grid gap-1 font-mono uppercase tracking-widest text-xs text-muted">
-					<span>FIG. 1a — HEIRLOOM CHRISTMAS TREE SPINNER. MILWAUKEE, WI</span>
-					<span>PATENT NO. 2733032</span>
-					<span>800 WATT / 120V AC</span>
-				</div>
 				<p class="text-lg max-w-prose">
 					My mom remembers lying on her back under this turner, looking up at her Christmas tree.
 					So do I. I grew up hearing that my grandfather "invented" it. Now we're not sure if
 					that is the case and we <strong class="font-bold">need your help.</strong> Every verified lead earns a donation to a teacher or school of your choosing.
 				</p>
+				<div class="grid gap-1 font-mono uppercase tracking-widest text-xs text-muted">
+					<span>FIG. 1a — HEIRLOOM CHRISTMAS TREE SPINNER. MILWAUKEE, WI</span>
+					<span>PATENT NO. 2733032</span>
+					<span>800 WATT / 120V AC</span>
+				</div>
 			</div>
 		</section>
 
@@ -119,10 +120,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<section class="border-t border-border pt-8">
 			<div class="grid gap-5 bg-white border border-border p-7 shadow-md">
 				<p>
-					<strong class="font-bold">My mom, now 75, still remembers lying beneath a rotating tree as a child.</strong> She would position herself on the carpet, looking straight up, watching the lights pass over her face in slow, hypnotic circles. The ornaments would catch the glow and send little reflections dancing across the ceiling. She says it was the most peaceful feeling in the world.
+					<strong class="font-bold">My mom loves Christmas. So do I. I think this Christmas Tree Turner has a lot to do with it.</strong> Mom still remembers lying beneath a rotating tree as a child. She would position herself on the carpet, looking straight up, watching the lights pass over her face in slow, hypnotic circles. The ornaments would catch the glow and send little reflections dancing across the ceiling. She says it was the most peaceful feeling in the world.
 				</p>
 				<p>
-					Decades later, I had the exact same experience. The same machine. The same hum. The same gentle turn. I remember the weight of anticipation every December when my dad would bring the Turner up from the basement. It was heavy — <strong class="font-bold">serious cast metal, not some plastic novelty</strong> — and it took two people to carry it. We'd center the tree on the platform, plug everything in, and watch it come to life.
+					Decades later, I had the exact same experience. The same machine. The same hum. The same gentle turn. I remember the weight of anticipation every December when my dad would bring the Turner out of the closet. It was heavy — <strong class="font-bold">serious cast metal, not some plastic novelty, it can hold a full 8-ft tree!</strong> — and it took two people to carry it. We'd center the tree on the platform, plug everything in, and watch it come to life.
 				</p>
 				<p>
 					The Turner did more than spin. It had:
@@ -134,13 +135,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					<li>A wired <strong class="font-bold">remote control</strong> to adjust rotation speed, lights, and music independently</li>
 				</ul>
 				<p>
-					Growing up, I always heard that <strong class="font-bold">my grandfather "invented" this thing</strong>. The story was vague but persistent: he was involved somehow, maybe in the design, maybe in the manufacturing. Milwaukee. The 1950s. A small operation. That was the legend.
+					Growing up, I always heard that <strong class="font-bold">my grandfather "invented" this thing</strong>. It was actually a pretty big part of my grade school personality. My grandpa <em>invented</em> this thing. I told the other kids. I wanted to be an inventor. I built things around the house (thanks for putting up with me, mom and dad!) to varying degrees of success. My older brother even loves this thing.
 				</p>
 				<p>
-					But legends fade. My grandfather passed away before I was old enough to ask the right questions. My grandmother is gone too. The people who knew the full story are no longer here to tell it. What we have now are fragments:
+					Over time, the story grew vague but persistent: he was involved somehow, maybe in the design, maybe in the manufacturing. Milwaukee. The 1950s. A small operation. That was the legend.
+				</p>
+				<p>
+					And while the legend may have faded or changed over time, our love for this thing has never been shinier. <strong class="font-bold">That's where you come in. We are hitting a dead-end doing the research on the original Christmas Tree Turner, and know someone out there can help.</strong> We're looking for librarians, historians, museum and archive maintainers, hobbyist sleuths—anyone who can do some serious, non-internet, in-real-life digging. What we have now are fragments:
 				</p>
 				<ul class="pl-5 list-disc grid gap-2">
-					<li>A name: <strong class="font-bold">Air Loom Christmas Tree Spinner</strong></li>
+					<li>A name: <strong class="font-bold">Heirloom Christmas Tree Spinner</strong></li>
 					<li>A manufacturer: <strong class="font-bold">SpinCraft</strong></li>
 					<li>A city: <strong class="font-bold">Milwaukee, Wisconsin</strong></li>
 					<li>A patent number: <strong class="font-bold">2733032</strong></li>
@@ -152,7 +156,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				<p>
 					If you can help us find the story — an old advertisement, a patent filing, a newspaper clipping, a photo from the factory floor, anything — <strong class="font-bold">we will honor a teacher or school of your choosing with a donation in your name.</strong> This isn't about money for us. It's about memory. It's about giving my mom an answer before it's too late.
 				</p>
-				<p class="font-mono text-sm uppercase tracking-widest">Signed, Your Name</p>
+				<p class="font-mono text-sm uppercase tracking-widest">Signed, The Wimberly Family</p>
 			</div>
 		</section>
 
@@ -161,7 +165,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Known Information</h2>
 			<div class="border border-border p-6 bg-white shadow-lg">
 				<div class="grid gap-3 font-mono uppercase tracking-wider text-sm">
-					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Name</span><span>Air Loom Christmas Tree Spinner</span></div>
+					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Name</span><span>Heirloom Christmas Tree Spinner</span></div>
 					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Patent</span><span>2733032</span></div>
 					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Manufacturer</span><span>SpinCraft</span></div>
 					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Location</span><span>Milwaukee, Wisconsin</span></div>
@@ -321,6 +325,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<p class="font-mono text-sm tracking-widest uppercase text-muted">
 				This is a personal historical research project. No commercial use intended.
 			</p>
+			<p class="font-mono text-sm tracking-widest uppercase text-muted mt-2">
+				Help, questions, and press inquiries: clark@superfun.team
+			</p>
 		</footer>
 	</main>
 
@@ -469,5 +476,37 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			const y = (e.clientY - rect.top) / rect.height;
 			lightboxImg.style.transformOrigin = `${x * 100}% ${y * 100}%`;
 		});
+	</script>
+
+	<!-- Background Music -->
+	<audio id="bg-music-1" src="/music/song-1.m4a" preload="auto"></audio>
+	<audio id="bg-music-2" src="/music/song-2.m4a" preload="auto"></audio>
+
+	<script>
+		const song1 = document.getElementById('bg-music-1') as HTMLAudioElement;
+		const song2 = document.getElementById('bg-music-2') as HTMLAudioElement;
+		let currentSong = song1;
+
+		song1.addEventListener('ended', () => {
+			currentSong = song2;
+			song2.play();
+		});
+
+		song2.addEventListener('ended', () => {
+			currentSong = song1;
+			song1.play();
+		});
+
+		// Start playing on first user interaction (required by browsers)
+		function startMusic() {
+			song1.play().catch(() => {});
+			document.removeEventListener('click', startMusic);
+			document.removeEventListener('keydown', startMusic);
+			document.removeEventListener('scroll', startMusic);
+		}
+
+		document.addEventListener('click', startMusic);
+		document.addEventListener('keydown', startMusic);
+		document.addEventListener('scroll', startMusic);
 	</script>
 </BaseLayout>
