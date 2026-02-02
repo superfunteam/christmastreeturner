@@ -24,6 +24,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				<div class="relative w-full h-96 overflow-visible bg-transparent pointer-events-none
 				            md:absolute md:top-0 md:right-0 md:w-3/5 md:h-full md:-mr-32">
 					<model-viewer
+						id="turner-model"
 						class="absolute inset-0 w-full h-full bg-transparent pointer-events-auto"
 						src="/christmas-tree-turner"
 						alt="3D model of the Christmas Tree Turner."
@@ -34,9 +35,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 						orientation="0 0 40deg"
 						min-camera-orbit="auto auto 2.3m"
 						max-camera-orbit="auto auto 5.9m"
-						poster="/images/photo-turner.jpeg"
 						shadow-intensity="0"
-					></model-viewer>
+					>
+						<div class="model-loader absolute inset-0 flex items-center justify-center">
+							<div class="w-12 h-12 border-2 border-border border-t-accent rounded-full animate-spin"></div>
+						</div>
+					</model-viewer>
 					<div class="absolute top-4 right-4 md:top-8 md:right-8 z-10 pointer-events-none">
 						<div class="bg-white border border-border px-2 py-1 md:px-3 md:py-2 w-40 md:w-56 font-mono uppercase tracking-wider text-xs text-text shadow-md">
 							Preview render. See full details below.
@@ -381,6 +385,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		}
 
 		setTimeout(triggerShimmer, 1500);
+	</script>
+
+	<script>
+		// Hide loader when model is loaded
+		const modelViewer = document.getElementById('turner-model');
+		modelViewer?.addEventListener('load', () => {
+			modelViewer.classList.add('loaded');
+		});
 	</script>
 
 	<script>

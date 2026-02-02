@@ -31,6 +31,22 @@ body {
   background-image: url('/textures/noise.svg');
 }
 
+/* Spin animation for loader */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Hide loader when model is loaded */
+model-viewer.loaded .model-loader {
+  display: none;
+}
+
 /* Shimmer overlay effect */
 .shimmer-overlay {
   mask-image: linear-gradient(
