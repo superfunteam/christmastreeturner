@@ -12,17 +12,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<span class="font-mono text-xs tracking-wider uppercase border border-white/50 px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-accent transition-colors">View</span>
 	</a>
 
-	<!-- Spacer for fixed banner -->
-	<div class="h-12"></div>
-
-	<main id="main-content" class="flex flex-col gap-16">
+	<main id="main-content" class="flex flex-col gap-32">
 		<!-- Hero Section -->
 		<section class="relative overflow-visible">
-			<p class="font-mono uppercase text-xs tracking-widest text-muted mt-8 mb-3 relative z-20">Help a Texas family recover history</p>
-			<div class="grid grid-cols-1 gap-8 items-center md:min-h-screen relative overflow-visible">
-				<h1 class="font-display uppercase text-7xl md:text-[12rem] tracking-wider leading-none m-0 relative z-20 md:max-w-3xl">Have You Seen Me?</h1>
-				<div class="relative w-full h-96 overflow-visible bg-transparent pointer-events-none
-				            md:absolute md:top-0 md:right-0 md:w-3/5 md:h-full md:-mr-32">
+			<div class="flex justify-between items-center mt-8 mb-3 relative z-20 italic" style="font-family: 'Tay Highbeams', sans-serif;">
+				<p class="uppercase text-sm md:text-xl tracking-tight" style="color: #8B2942;">Help a Texas family recover history</p>
+				<nav class="hidden md:flex gap-6 uppercase text-sm md:text-xl tracking-tight">
+					<a href="#overview" class="text-muted hover:text-text transition-colors">Overview</a>
+					<a href="#bounties" class="text-muted hover:text-text transition-colors">Bounties</a>
+					<a href="#faq" class="text-muted hover:text-text transition-colors">FAQs</a>
+					<a href="#contact" class="text-muted hover:text-text transition-colors">Contact</a>
+				</nav>
+			</div>
+			<div class="grid grid-cols-1 gap-8 items-center relative overflow-visible">
+				<h1 class="uppercase text-7xl md:text-[11.5rem] tracking-wider leading-none md:leading-[0.85] my-24 relative z-20 md:max-w-3xl md:-ml-2" style="font-family: 'Jukebox Johnny', sans-serif;">Have You Seen Me?</h1>
+				<div class="relative w-full h-96 overflow-hidden bg-transparent pointer-events-none z-30
+				            md:absolute md:top-0 md:right-0 md:w-3/5 md:h-full md:-mr-32 md:overflow-visible">
 					<model-viewer
 						id="turner-model"
 						class="absolute inset-0 w-full h-full bg-transparent pointer-events-auto"
@@ -36,6 +41,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 						min-camera-orbit="auto auto 2.3m"
 						max-camera-orbit="auto auto 5.9m"
 						shadow-intensity="0"
+						interaction-prompt="none"
+						loading="eager"
 					>
 						<div class="model-loader absolute inset-0 flex items-center justify-center">
 							<div class="w-12 h-12 border-2 border-border border-t-accent rounded-full animate-spin"></div>
@@ -46,7 +53,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					</noscript>
 				</div>
 				<!-- Label positioned relative to the grid, not the overflowing model container -->
-				<div class="absolute top-4 right-4 md:top-8 md:right-8 z-30 pointer-events-none">
+				<div class="absolute top-4 right-4 md:top-20 md:right-8 z-30 pointer-events-none">
 					<div class="bg-white border border-border px-2 py-1 md:px-3 md:py-2 w-40 md:w-56 font-mono uppercase tracking-wider text-xs text-text shadow-md">
 						Preview render. See full details below.
 					</div>
@@ -62,17 +69,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					So do I. I grew up hearing that my grandfather "invented" it. Now we're not sure if
 					that is the case and we <strong class="font-bold">need your help.</strong> Every verified lead earns a donation to a teacher or school of your choosing.
 				</p>
-				<div class="grid gap-1 font-mono uppercase tracking-widest text-xs text-muted">
-					<span>FIG. 1a — HEIRLOOM CHRISTMAS TREE SPINNER. MILWAUKEE, WI</span>
-					<span>PATENT NO. 2733032</span>
-					<span>800 WATT / 120V AC</span>
+				<div class="bg-white border border-black/10 p-5 shadow-sm rounded-sm inline-block">
+					<div class="grid gap-1 font-mono uppercase tracking-widest text-xs text-muted">
+						<span>FIG. 1a — HEIRLOOM CHRISTMAS TREE SPINNER. MILWAUKEE, WI</span>
+						<span>PATENT NO. 2733032</span>
+						<span>800 WATT / 120V AC</span>
+					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Christmas Tree Turner Overview -->
-		<section class="border-t border-border pt-8">
-			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Hardware Overview</h2>
+		<section id="overview" class="border-t border-border pt-16 scroll-mt-8">
+			<h2 class="uppercase tracking-tight mb-5 text-3xl italic" style="font-family: 'Tay Highbeams', sans-serif;">Hardware Overview</h2>
 			<div class="grid md:grid-cols-3 gap-7">
 				<figure class="grid gap-2">
 					<div class="aspect-video bg-well flex items-center justify-center overflow-hidden shimmer-container">
@@ -116,151 +125,320 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			</div>
 		</section>
 
-		<!-- Family Letter -->
-		<section class="border-t border-border pt-8">
-			<div class="grid gap-5 bg-white border border-border p-7 shadow-md">
-				<p>
-					<strong class="font-bold">My mom loves Christmas. So do I. I think this Christmas Tree Turner has a lot to do with it.</strong> Mom still remembers lying beneath a rotating tree as a child. She would position herself on the carpet, looking straight up, watching the lights pass over her face in slow, hypnotic circles. The ornaments would catch the glow and send little reflections dancing across the ceiling. She says it was the most peaceful feeling in the world.
-				</p>
-				<p>
-					Decades later, I had the exact same experience. The same machine. The same hum. The same gentle turn. I remember the weight of anticipation every December when my dad would bring the Turner out of the closet. It was heavy — <strong class="font-bold">serious cast metal, not some plastic novelty, it can hold a full 8-ft tree!</strong> — and it took two people to carry it. We'd center the tree on the platform, plug everything in, and watch it come to life.
-				</p>
-				<p>
-					The Turner did more than spin. It had:
-				</p>
-				<ul class="pl-5 list-disc grid gap-2">
-					<li>A <strong class="font-bold">rotating platform</strong> strong enough to hold a full-size decorated tree</li>
-					<li><strong class="font-bold">Integrated electrical outlets</strong> that powered the tree lights while spinning</li>
-					<li>A <strong class="font-bold">mechanical music box</strong> that played Christmas carols</li>
-					<li>A wired <strong class="font-bold">remote control</strong> to adjust rotation speed, lights, and music independently</li>
-				</ul>
-				<p>
-					Growing up, I always heard that <strong class="font-bold">my grandfather "invented" this thing</strong>. It was actually a pretty big part of my grade school personality. My grandpa <em>invented</em> this thing. I told the other kids. I wanted to be an inventor. I built things around the house (thanks for putting up with me, mom and dad!) to varying degrees of success. My older brother even loves this thing.
-				</p>
-				<p>
-					Over time, the story grew vague but persistent: he was involved somehow, maybe in the design, maybe in the manufacturing. Milwaukee. The 1950s. A small operation. That was the legend.
-				</p>
-				<p>
-					And while the legend may have faded or changed over time, our love for this thing has never been shinier. <strong class="font-bold">That's where you come in. We are hitting a dead-end doing the research on the original Christmas Tree Turner, and know someone out there can help.</strong> We're looking for librarians, historians, museum and archive maintainers, hobbyist sleuths—anyone who can do some serious, non-internet, in-real-life digging. What we have now are fragments:
-				</p>
-				<ul class="pl-5 list-disc grid gap-2">
-					<li>A name: <strong class="font-bold">Heirloom Christmas Tree Spinner</strong></li>
-					<li>A manufacturer: <strong class="font-bold">SpinCraft</strong></li>
-					<li>A city: <strong class="font-bold">Milwaukee, Wisconsin</strong></li>
-					<li>A patent number: <strong class="font-bold">2733032</strong></li>
-					<li>Possible family names: <strong class="font-bold">Ulrich, Ulrich Brothers Manufacturing</strong></li>
-				</ul>
-				<p>
-					We want to know the truth. Was my grandfather really involved? Did he help design it? Did he just work at the factory? Or is this a family myth that got embellished over the years? <strong class="font-bold">We want to document the real history before it disappears completely.</strong>
-				</p>
-				<p>
-					If you can help us find the story — an old advertisement, a patent filing, a newspaper clipping, a photo from the factory floor, anything — <strong class="font-bold">we will honor a teacher or school of your choosing with a donation in your name.</strong> This isn't about money for us. It's about memory. It's about giving my mom an answer before it's too late.
-				</p>
-				<p class="font-mono text-sm uppercase tracking-widest">Signed, The Wimberly Family</p>
-			</div>
-		</section>
-
-		<!-- Known Information -->
-		<section class="border-t border-border pt-8">
-			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Known Information</h2>
-			<div class="border border-border p-6 bg-white shadow-lg">
-				<div class="grid gap-3 font-mono uppercase tracking-wider text-sm">
-					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Name</span><span>Heirloom Christmas Tree Spinner</span></div>
-					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Patent</span><span>2733032</span></div>
-					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Manufacturer</span><span>SpinCraft</span></div>
-					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Location</span><span>Milwaukee, Wisconsin</span></div>
-					<div class="grid grid-cols-2 gap-3 border-b border-border pb-2"><span class="w-36">Power</span><span>800W / 120V AC</span></div>
-					<div class="grid grid-cols-2 gap-3"><span class="w-36">Use</span><span>Indoor Use Only</span></div>
-				</div>
-
-				<div class="mt-6 pt-6 border-t border-border">
-					<h3 class="font-display uppercase tracking-widest mb-4 text-base">Possible Associations</h3>
-					<ul class="mb-3 pl-5 list-disc grid gap-1 text-sm">
-						<li>Ulrich family</li>
-						<li>Ulrich Brothers Manufacturing (unconfirmed)</li>
-						<li>Tex Trans (unconfirmed)</li>
-						<li>German-American manufacturing background</li>
+		<!-- Family Letter + Known Information -->
+		<section class="border-t border-border pt-16 overflow-hidden">
+			<div class="grid md:grid-cols-3 gap-16">
+				<!-- Family Letter (2/3 width) -->
+				<div class="md:col-span-2 grid gap-5 bg-white border border-black/10 p-10 md:p-14 shadow-sm rounded-sm">
+					<p>
+						<strong class="font-bold">My mom loves Christmas. So do I. I think this Christmas Tree Turner has a lot to do with it.</strong> Mom still remembers lying beneath a rotating tree as a child. She would position herself on the carpet, looking straight up, watching the lights pass over her face in slow, hypnotic circles. The ornaments would catch the glow and send little reflections dancing across the ceiling. She says it was the most peaceful feeling in the world.
+					</p>
+					<p>
+						Decades later, I had the exact same experience. The same machine. The same hum. The same gentle turn. I remember the weight of anticipation every December when my dad would bring the Turner out of the closet. It was heavy — <strong class="font-bold">serious cast metal, not some plastic novelty, it can hold a full 8-ft tree!</strong> — and it took two people to carry it. We'd center the tree on the platform, plug everything in, and watch it come to life.
+					</p>
+					<p>
+						The Turner did more than spin. It had:
+					</p>
+					<ul class="pl-5 list-disc grid gap-2">
+						<li>A <strong class="font-bold">rotating platform</strong> strong enough to hold a full-size decorated tree</li>
+						<li><strong class="font-bold">Integrated electrical outlets</strong> that powered the tree lights while spinning</li>
+						<li>A <strong class="font-bold">mechanical music box</strong> that played Christmas carols</li>
+						<li>A wired <strong class="font-bold">remote control</strong> to adjust rotation speed, lights, and music independently</li>
 					</ul>
-					<p class="italic text-muted text-sm">These are family recollections, not verified facts.</p>
+					<p>
+						Growing up, I always heard that <strong class="font-bold">my grandfather "invented" this thing</strong>. It was actually a pretty big part of my grade school personality. My grandpa <em>invented</em> this thing. I told the other kids. I wanted to be an inventor. I built things around the house (thanks for putting up with me, mom and dad!) to varying degrees of success. My older brother even loves this thing.
+					</p>
+					<p>
+						Over time, the story grew vague but persistent: he was involved somehow, maybe in the design, maybe in the manufacturing. Milwaukee. The 1950s. A small operation. That was the legend.
+					</p>
+					<p>
+						And while the legend may have faded or changed over time, our love for this thing has never been shinier. <strong class="font-bold">That's where you come in. We are hitting a dead-end doing the research on the original Christmas Tree Turner, and know someone out there can help.</strong> We're looking for librarians, historians, museum and archive maintainers, hobbyist sleuths—anyone who can do some serious, non-internet, in-real-life digging. What we have now are fragments:
+					</p>
+					<ul class="pl-5 list-disc grid gap-2">
+						<li>A name: <strong class="font-bold">Heirloom Christmas Tree Spinner</strong></li>
+						<li>A manufacturer: <strong class="font-bold">SpinCraft</strong></li>
+						<li>A city: <strong class="font-bold">Milwaukee, Wisconsin</strong></li>
+						<li>A patent number: <strong class="font-bold">2733032</strong></li>
+						<li>Possible family names: <strong class="font-bold">Ulrich, Ulrich Brothers Manufacturing</strong></li>
+					</ul>
+					<p>
+						We want to know the truth. Was my grandfather really involved? Did he help design it? Did he just work at the factory? Or is this a family myth that got embellished over the years? <strong class="font-bold">We want to document the real history before it disappears completely.</strong>
+					</p>
+					<p>
+						If you can help us find the story — an old advertisement, a patent filing, a newspaper clipping, a photo from the factory floor, anything — <strong class="font-bold">we will honor a teacher or school of your choosing with a donation in your name.</strong> This isn't about money for us. It's about memory. It's about giving my mom an answer before it's too late.
+					</p>
+					<p class="font-mono text-sm uppercase tracking-widest">Signed, The Wimberly Family</p>
+				</div>
+
+				<!-- Known Information (1/3 width) -->
+				<div class="min-w-0">
+					<h2 class="uppercase tracking-tight mb-5 text-3xl italic" style="font-family: 'Tay Highbeams', sans-serif;">Known Information</h2>
+					<dl class="grid gap-3 font-mono uppercase tracking-wider text-sm">
+						<div class="border-b border-border pb-2"><dt class="text-muted text-xs">Name</dt><dd>Heirloom Christmas Tree Spinner</dd></div>
+						<div class="border-b border-border pb-2"><dt class="text-muted text-xs">Patent</dt><dd>2733032</dd></div>
+						<div class="border-b border-border pb-2"><dt class="text-muted text-xs">Manufacturer</dt><dd>SpinCraft</dd></div>
+						<div class="border-b border-border pb-2"><dt class="text-muted text-xs">Location</dt><dd>Milwaukee, Wisconsin</dd></div>
+						<div class="border-b border-border pb-2"><dt class="text-muted text-xs">Power</dt><dd>800W / 120V AC</dd></div>
+						<div><dt class="text-muted text-xs">Use</dt><dd>Indoor Use Only</dd></div>
+					</dl>
+
+					<div class="mt-6 pt-6 border-t border-border">
+						<h3 class="font-display uppercase tracking-widest mb-4 text-base">Possible Associations</h3>
+						<ul class="mb-3 pl-5 list-disc grid gap-1 text-sm">
+							<li>Ulrich family</li>
+							<li>Ulrich Brothers Manufacturing (unconfirmed)</li>
+							<li>Tex Trans (unconfirmed)</li>
+							<li>German-American manufacturing background</li>
+						</ul>
+						<p class="italic text-muted text-sm">These are family recollections, not verified facts.</p>
+					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Bounties -->
-		<section class="border-t border-border pt-8">
-			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Bounties</h2>
-			<p class="text-lg mb-6 max-w-prose">Help us solve this mystery and we'll make a donation to a teacher or school you choose. No cash to you — just the satisfaction of helping preserve history and supporting education.</p>
-			<div class="grid gap-6 grid-cols-1 md:grid-cols-2">
-				<div class="border border-border p-5 bg-white grid gap-3">
-					<div class="text-3xl font-display text-accent">$250</div>
-					<h3 class="font-display uppercase tracking-widest m-0">Print Advertisement</h3>
-					<p>Magazine, newspaper, or catalog reference with publication date.</p>
-					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: archival scan or library reference.</p>
-					<p class="text-sm text-accent">→ Donated to your chosen teacher or school</p>
+		<!-- Documents -->
+		<section class="border-t border-border pt-16">
+			<h2 class="uppercase tracking-tight mb-5 text-3xl italic" style="font-family: 'Tay Highbeams', sans-serif;">Documents</h2>
+			<p class="text-lg mb-6 max-w-prose">Primary sources we've found so far. Help us find more.</p>
+
+			<div class="grid gap-8 overflow-hidden -mr-6 md:-mr-10 pr-6 md:pr-10">
+				<!-- Patent Document Card -->
+				<article class="grid md:grid-cols-3 gap-6 items-start">
+					<div class="grid gap-3">
+						<h3 class="font-display uppercase tracking-widest text-xl">U.S. Patent 2,733,032</h3>
+						<dl class="grid gap-1 font-mono text-sm">
+							<div class="flex gap-2"><dt class="text-muted">Year:</dt><dd>1956</dd></div>
+							<div class="flex gap-2"><dt class="text-muted">Title:</dt><dd>Christmas Tree Rotator</dd></div>
+							<div class="flex gap-2"><dt class="text-muted">Pages:</dt><dd>3</dd></div>
+						</dl>
+						<div class="flex flex-wrap gap-3 mt-2">
+							<a href="/docs/US_Patent_2733032.pdf" target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+								View Full PDF
+							</a>
+							<a href="/docs/US_Patent_2733032.md" target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+								View as Plaintext
+							</a>
+						</div>
+						<div class="mt-4 p-3 bg-accent/10 border-l-4 border-accent rounded-r text-sm">
+							<strong class="font-bold">Clue!</strong> The original patent makes NO MENTION of the electric motor, music box, or outlets for lights.
+						</div>
+					</div>
+
+					<!-- Page Previews - 2/3 width, bleeds right, third page half-cropped -->
+					<div class="md:col-span-2 flex gap-4 items-start">
+						<a href="/docs/US_Patent_2733032.pdf" target="_blank" class="relative w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:rotate-1">
+							<!-- Shadow pages behind to suggest depth -->
+							<div class="absolute top-2 left-2 w-full h-full bg-black/5 rounded-sm"></div>
+							<div class="absolute top-1 left-1 w-full h-full bg-black/10 rounded-sm"></div>
+							<img src="/docs/thumbnails/US_Patent_2733032-page-1.png" alt="Patent page 1" class="relative block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
+						</a>
+						<a href="/docs/US_Patent_2733032.pdf" target="_blank" class="block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:-rotate-1">
+							<img src="/docs/thumbnails/US_Patent_2733032-page-2.png" alt="Patent page 2" class="block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
+						</a>
+						<a href="/docs/US_Patent_2733032.pdf" target="_blank" class="block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:rotate-2">
+							<img src="/docs/thumbnails/US_Patent_2733032-page-3.png" alt="Patent page 3" class="block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
+						</a>
+					</div>
+				</article>
+
+				<hr class="border-t border-black/10" />
+
+				<!-- Patent Document Card 2 -->
+				<article class="grid md:grid-cols-3 gap-6 items-start">
+					<div class="grid gap-3">
+						<h3 class="font-display uppercase tracking-widest text-xl">U.S. Patent 2,847,175</h3>
+						<dl class="grid gap-1 font-mono text-sm">
+							<div class="flex gap-2"><dt class="text-muted">Year:</dt><dd>1958</dd></div>
+							<div class="flex gap-2"><dt class="text-muted">Title:</dt><dd>Revolving Stand</dd></div>
+							<div class="flex gap-2"><dt class="text-muted">Assignee:</dt><dd>Spincraft, Inc.</dd></div>
+							<div class="flex gap-2"><dt class="text-muted">Pages:</dt><dd>3</dd></div>
+						</dl>
+						<div class="flex flex-wrap gap-3 mt-2">
+							<a href="/docs/US_Patent_2847175.pdf" target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+								View Full PDF
+							</a>
+							<a href="/docs/US_Patent_2847175.md" target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+								View as Plaintext
+							</a>
+						</div>
+						<div class="mt-4 p-3 bg-accent/10 border-l-4 border-accent rounded-r text-sm">
+							<strong class="font-bold">Clue!</strong> This patent DOES mention illumination, lights, and a music box—filed 2 years after the first!
+						</div>
+					</div>
+
+					<!-- Page Previews - 2/3 width, bleeds right, third page half-cropped -->
+					<div class="md:col-span-2 flex gap-4 items-start">
+						<a href="/docs/US_Patent_2847175.pdf" target="_blank" class="relative w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:rotate-1">
+							<!-- Shadow pages behind to suggest depth -->
+							<div class="absolute top-2 left-2 w-full h-full bg-black/5 rounded-sm"></div>
+							<div class="absolute top-1 left-1 w-full h-full bg-black/10 rounded-sm"></div>
+							<img src="/docs/thumbnails/US_Patent_2847175-page-1.png" alt="Patent page 1" class="relative block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
+						</a>
+						<a href="/docs/US_Patent_2847175.pdf" target="_blank" class="block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:-rotate-1">
+							<img src="/docs/thumbnails/US_Patent_2847175-page-2.png" alt="Patent page 2" class="block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
+						</a>
+						<a href="/docs/US_Patent_2847175.pdf" target="_blank" class="block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:rotate-2">
+							<img src="/docs/thumbnails/US_Patent_2847175-page-3.png" alt="Patent page 3" class="block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
+						</a>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<!-- Bounties + FAQ Side by Side -->
+		<section id="bounties" class="border-t border-border pt-16 scroll-mt-8">
+			<div class="grid md:grid-cols-2 gap-16">
+				<!-- Bounties (Left) -->
+				<div>
+					<div class="bg-accent text-white p-6 mb-6">
+						<h2 class="uppercase tracking-tight text-3xl m-0 italic" style="font-family: 'Tay Highbeams', sans-serif;">Bounties</h2>
+						<p class="mt-2 text-white/80">Help us solve this mystery and we'll make a donation to a teacher or school you choose.</p>
+					</div>
+					<div class="grid gap-4">
+						<div class="border border-border p-5 bg-white grid gap-3">
+							<div class="text-3xl font-display text-accent">$250</div>
+							<h3 class="font-display uppercase tracking-widest m-0">Print Advertisement</h3>
+							<p>Magazine, newspaper, or catalog reference with publication date.</p>
+							<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: archival scan or library reference.</p>
+							<a href="#contact" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">Donated to your chosen teacher or school</a>
+						</div>
+						<div class="border border-border p-5 bg-white grid gap-3">
+							<div class="text-3xl font-display text-accent">$250</div>
+							<h3 class="font-display uppercase tracking-widest m-0">Patent Documentation</h3>
+							<p>Filing notes, diagrams, or correspondence tied to Patent 2733032.</p>
+							<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: primary source documentation.</p>
+							<a href="#contact" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">Donated to your chosen teacher or school</a>
+						</div>
+						<div class="border border-border p-5 bg-white grid gap-3">
+							<div class="text-3xl font-display text-accent">$250</div>
+							<h3 class="font-display uppercase tracking-widest m-0">Working Unit</h3>
+							<p>Any surviving example of a full-size Christmas Tree Turner in operation.</p>
+							<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: photo/video evidence + location.</p>
+							<a href="#contact" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">Donated to your chosen teacher or school</a>
+						</div>
+						<div class="border border-border p-5 bg-white grid gap-3">
+							<div class="text-3xl font-display text-accent">$500</div>
+							<h3 class="font-display uppercase tracking-widest m-0">Verified Family Connection</h3>
+							<p>Documents tying the Ulrich family to manufacturing or distribution.</p>
+							<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: official records or notarized letters.</p>
+							<a href="#contact" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">Donated to your chosen teacher or school</a>
+						</div>
+						<div class="border border-border p-5 bg-white grid gap-3">
+							<div class="text-3xl font-display text-accent">$500</div>
+							<h3 class="font-display uppercase tracking-widest m-0">Verified Family Photo</h3>
+							<p>Until-now unseen photo showing an Ulrich family member with a unit in a commercial context (work, sales, ad).</p>
+							<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: provenance + identifiable individuals.</p>
+							<a href="#contact" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">Donated to your chosen teacher or school</a>
+						</div>
+					</div>
+					<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">
+						Bounties are paid as donations to a teacher or school of your choosing.
+					</p>
 				</div>
-				<div class="border border-border p-5 bg-white grid gap-3">
-					<div class="text-3xl font-display text-accent">$250</div>
-					<h3 class="font-display uppercase tracking-widest m-0">Patent Documentation</h3>
-					<p>Filing notes, diagrams, or correspondence tied to Patent 2733032.</p>
-					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: primary source documentation.</p>
-					<p class="text-sm text-accent">→ Donated to your chosen teacher or school</p>
-				</div>
-				<div class="border border-border p-5 bg-white grid gap-3">
-					<div class="text-3xl font-display text-accent">$500</div>
-					<h3 class="font-display uppercase tracking-widest m-0">Working Unit</h3>
-					<p>Any surviving example of a full-size Christmas Tree Turner in operation.</p>
-					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: photo/video evidence + location.</p>
-					<p class="text-sm text-accent">→ Donated to your chosen teacher or school</p>
-				</div>
-				<div class="border border-border p-5 bg-white grid gap-3">
-					<div class="text-3xl font-display text-accent">$500</div>
-					<h3 class="font-display uppercase tracking-widest m-0">Verified Family Connection</h3>
-					<p>Documents tying the Ulrich family to manufacturing or distribution.</p>
-					<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: official records or notarized letters.</p>
-					<p class="text-sm text-accent">→ Donated to your chosen teacher or school</p>
+
+				<!-- FAQ (Right) -->
+				<div id="faq" class="scroll-mt-8">
+					<h2 class="uppercase tracking-tight mb-6 text-3xl italic" style="font-family: 'Tay Highbeams', sans-serif;">Frequently Asked Questions</h2>
+					<div class="grid gap-8">
+						<div class="grid gap-2">
+							<h3 class="font-display uppercase tracking-widest text-xl">Why are you doing this?</h3>
+							<p>We want to tie the Christmas Tree Turner to the Ulrich family name. We <em>know</em> the unit exists—it's sitting in a closet in Texas right now. We're not trying to prove it's real. We just want to understand how our family is connected to it. Was grandpa an inventor? A factory worker? A savvy buyer with a good story? The truth matters more than the legend, and we'd love to unwrap this mystery before it's lost forever.</p>
+						</div>
+
+						<div class="grid gap-2">
+							<h3 class="font-display uppercase tracking-widest text-xl">How can I help?</h3>
+							<p>A few ways to get on Santa's nice list:</p>
+							<ul class="pl-5 list-disc grid gap-1">
+								<li><strong class="font-bold">Join the search</strong> — dig through archives, patent records, old catalogs, newspaper clippings</li>
+								<li><strong class="font-bold">Connect us with experts</strong> — librarians, historians, museum curators, or anyone with access to large print archives</li>
+								<li><strong class="font-bold">Fund a bounty</strong> — want to sponsor a reward tier? Email <a href="mailto:clark@superfun.team" class="text-accent hover:underline">clark@superfun.team</a></li>
+								<li><strong class="font-bold">Spread the word</strong> — share this page with anyone who loves a good mystery (or Christmas)</li>
+							</ul>
+						</div>
+
+						<div class="grid gap-2">
+							<h3 class="font-display uppercase tracking-widest text-xl">Why not just use AI?</h3>
+							<p>We have! AI helped us organize what we know, transcribe patents, and brainstorm search strategies. But here's the thing: even the robots are telling us to go analog. This stuff happened before digitization, and most of it never made it online. We're talking microfilm, dusty filing cabinets, and physical archives in Milwaukee. Sometimes you have to go old school to find old things. ChatGPT can't walk into a library basement for us (yet).</p>
+						</div>
+
+						<div class="grid gap-2">
+							<h3 class="font-display uppercase tracking-widest text-xl">Why teachers and schools?</h3>
+							<p>My mom was a teacher for over 40 years. She spent her career helping kids learn, often buying supplies out of her own pocket. The bounties aren't cash prizes—they're donations made in your honor to a teacher or school you choose. Think of it as paying forward the spirit of the season. You help us find history, we help a classroom. Everyone wins (except maybe your free time).</p>
+						</div>
+
+						<div class="grid gap-2">
+							<h3 class="font-display uppercase tracking-widest text-xl">What if I find something but it's not a bounty category?</h3>
+							<p>Send it anyway! Every lead helps, even if it doesn't fit a specific bounty. We'll still acknowledge your contribution, and if it's significant, we'll find a way to make a donation in your name. No lump of coal for partial credit here.</p>
+						</div>
+
+						<div class="grid gap-2">
+							<h3 class="font-display uppercase tracking-widest text-xl">Is this a scam?</h3>
+							<p>Nope—just a family with a weird heirloom and too much curiosity. We're not selling anything. We're not collecting your data. We just really want to know if grandpa invented a Christmas tree spinner or if that was a tall tale told over too much eggnog. You can verify the patents yourself; they're public record.</p>
+						</div>
+
+						<div class="grid gap-2">
+							<h3 class="font-display uppercase tracking-widest text-xl">Can I see the actual Turner?</h3>
+							<p>It's currently in storage in Texas, waiting for its moment to spin again. If you're a museum, documentary filmmaker, or just happen to be in the area with a really good reason, reach out. We're open to showing it off for the right occasion. It deserves to be seen—preferably with a tree on top and carols playing.</p>
+						</div>
+					</div>
 				</div>
 			</div>
-			<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">
-				Bounties are paid as donations to a teacher or school of your choosing.
-			</p>
 		</section>
 
 		<!-- Submit a Lead -->
-		<section class="border-t border-border pt-8">
-			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Submit a Lead</h2>
-			<form class="grid gap-4" method="post" enctype="multipart/form-data">
-				<div>
-					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="name">Name</label>
-					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="name" name="name" type="text" autocomplete="name" />
+		<section id="contact" class="border-t border-border pt-16 scroll-mt-8">
+			<div class="bg-accent text-white p-8 md:p-12 relative overflow-hidden">
+				<!-- Background schematic image -->
+				<div class="hidden md:block absolute top-0 right-0 bottom-0 w-1/2 pointer-events-none" aria-hidden="true">
+					<img src="/images/schema.webp" alt="" class="w-full h-full object-cover object-left-top mix-blend-multiply opacity-40" />
 				</div>
-				<div>
-					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="email">Email</label>
-					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="email" name="email" type="email" autocomplete="email" required />
+
+				<h2 class="uppercase tracking-tight mb-3 text-3xl relative z-10 italic" style="font-family: 'Tay Highbeams', sans-serif;">Submit a Lead</h2>
+				<p class="text-white/80 mb-8 max-w-2xl relative z-10">Found something? We're looking for print advertisements, catalog listings, newspaper clippings, patent documents, factory records, family photos, or any mention of SpinCraft, the Ulrich family, or Christmas Tree Turners from the 1950s-60s Milwaukee area. Even partial leads help!</p>
+
+				<form id="lead-form" class="grid gap-5 max-w-2xl relative z-10" name="leads" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+					<input type="hidden" name="form-name" value="leads" />
+					<div class="hidden" aria-hidden="true">
+						<label for="bot-field">Don't fill this out</label>
+						<input id="bot-field" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="name">Name</label>
+						<input class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="name" name="name" type="text" autocomplete="name" />
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="email">Email</label>
+						<input class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="email" name="email" type="email" autocomplete="email" required />
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="details">What You Found</label>
+						<textarea class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="details" name="details" rows="5" required></textarea>
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="donation">Teacher or School to Receive Donation (optional)</label>
+						<input class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="donation" name="donation" type="text" />
+					</div>
+					<div>
+						<button id="submit-btn" class="w-full py-4 px-6 bg-white text-accent font-mono uppercase tracking-widest cursor-pointer hover:bg-white/90 transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" type="submit">
+							<span id="submit-text">Send Submission</span>
+							<span id="submit-loading" class="hidden">Sending...</span>
+						</button>
+					</div>
+				</form>
+
+				<div id="form-success" class="hidden max-w-2xl text-center py-12 relative z-10">
+					<div class="text-6xl mb-4">🎄</div>
+					<h3 class="font-display uppercase tracking-widest text-2xl mb-3">Thank You!</h3>
+					<p class="text-white/80">Your lead has been received. Our family truly appreciates you taking the time to help us solve this mystery. We'll be in touch if we need more details!</p>
 				</div>
-				<div>
-					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="details">What You Found</label>
-					<textarea class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="details" name="details" rows="5" required></textarea>
-				</div>
-				<div>
-					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="upload">Upload (optional)</label>
-					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="upload" name="upload" type="file" />
-				</div>
-				<div>
-					<label class="font-mono text-xs tracking-widest uppercase block mb-1" for="donation">Teacher or School to Receive Donation (optional)</label>
-					<input class="w-full border border-border p-3 font-serif bg-white focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" id="donation" name="donation" type="text" />
-				</div>
-				<div class="hidden" aria-hidden="true">
-					<label for="website">Website</label>
-					<input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
-				</div>
-				<button class="border border-border py-3 px-5 bg-accent text-white font-mono uppercase tracking-widest cursor-pointer focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2" type="submit">Send Submission</button>
-			</form>
-			<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">We respond to every verified lead. Verified submissions earn donations to teachers and schools — not cash to you.</p>
+
+				<p class="font-mono text-xs tracking-widest uppercase text-white/50 mt-6 max-w-2xl relative z-10">We respond to every verified lead. Verified submissions earn donations to teachers and schools — not cash to you.</p>
+			</div>
 		</section>
 
 		<!-- Gallery -->
-		<section class="border-t border-border pt-8">
-			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Gallery</h2>
+		<section class="border-t border-border pt-16">
+			<h2 class="uppercase tracking-tight mb-5 text-3xl italic" style="font-family: 'Tay Highbeams', sans-serif;">Gallery</h2>
 			<div class="grid gap-5 grid-cols-2 md:grid-cols-3">
 				<figure class="grid gap-2">
 					<button type="button" class="cursor-zoom-in border-0 p-0 bg-transparent" data-lightbox="/images/photo-turner.jpeg" data-alt="Main view of the Turner.">
@@ -302,8 +480,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		</section>
 
 		<!-- Updates / Findings Log -->
-		<section class="border-t border-border pt-8">
-			<h2 class="font-display uppercase tracking-widest mb-5 text-3xl">Updates / Findings Log</h2>
+		<section class="border-t border-border pt-16">
+			<h2 class="uppercase tracking-tight mb-5 text-3xl italic" style="font-family: 'Tay Highbeams', sans-serif;">Updates / Findings Log</h2>
 			<div class="grid gap-4">
 				<div class="grid gap-1 border-b border-border pb-3">
 					<span class="font-mono text-sm uppercase tracking-widest">JAN 22, 2026</span>
@@ -321,7 +499,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		</section>
 
 		<!-- Footer -->
-		<footer class="border-t border-border pt-8">
+		<footer class="border-t border-border pt-16">
 			<p class="font-mono text-sm tracking-widest uppercase text-muted">
 				This is a personal historical research project. No commercial use intended.
 			</p>
@@ -395,11 +573,55 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 	</script>
 
 	<script>
-		// Hide loader when model is loaded
-		const modelViewer = document.getElementById('turner-model');
+		// Hide loader when model is loaded + scroll-based rotation speed
+		const modelViewer = document.getElementById('turner-model') as any;
 		modelViewer?.addEventListener('load', () => {
 			modelViewer.classList.add('loaded');
 		});
+
+		// Scroll-based rotation with inertia
+		const BASE_SPEED = 8; // degrees per second (minimum when idle)
+		const MAX_SPEED = 360; // degrees per second (maximum when scrolling fast)
+		const SCROLL_MULTIPLIER = 1.5; // how much scroll speed affects rotation (tripled)
+		const DECAY = 0.97; // inertia decay factor (higher = more inertia)
+
+		let currentSpeed = BASE_SPEED;
+		let scrollDirection = 1; // 1 = forward, -1 = reverse
+		let lastScrollY = window.scrollY;
+		let lastScrollTime = Date.now();
+
+		function updateRotationSpeed() {
+			// Apply inertia decay toward base speed (in current direction)
+			const targetSpeed = BASE_SPEED * scrollDirection;
+			currentSpeed = targetSpeed + (currentSpeed - targetSpeed) * DECAY;
+
+			// Update model-viewer rotation speed
+			if (modelViewer) {
+				modelViewer.setAttribute('rotation-per-second', `${currentSpeed}deg`);
+			}
+
+			requestAnimationFrame(updateRotationSpeed);
+		}
+
+		window.addEventListener('scroll', () => {
+			const now = Date.now();
+			const deltaTime = Math.max(now - lastScrollTime, 1);
+			const deltaScroll = window.scrollY - lastScrollY;
+			const scrollSpeed = Math.abs(deltaScroll) / deltaTime * 1000; // pixels per second
+
+			// Set direction based on scroll direction
+			scrollDirection = deltaScroll > 0 ? 1 : -1;
+
+			// Add scroll speed to current rotation speed (in scroll direction)
+			const boost = scrollSpeed * SCROLL_MULTIPLIER * scrollDirection;
+			currentSpeed = Math.max(-MAX_SPEED, Math.min(MAX_SPEED, currentSpeed + boost));
+
+			lastScrollY = window.scrollY;
+			lastScrollTime = now;
+		}, { passive: true });
+
+		// Start the animation loop
+		updateRotationSpeed();
 	</script>
 
 	<script>
@@ -508,5 +730,43 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		document.addEventListener('click', startMusic);
 		document.addEventListener('keydown', startMusic);
 		document.addEventListener('scroll', startMusic);
+	</script>
+
+	<script>
+		// Form submission with animated success
+		const leadForm = document.getElementById('lead-form') as HTMLFormElement;
+		const submitBtn = document.getElementById('submit-btn');
+		const submitText = document.getElementById('submit-text');
+		const submitLoading = document.getElementById('submit-loading');
+		const formSuccess = document.getElementById('form-success');
+
+		leadForm?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			// Show loading state
+			submitText?.classList.add('hidden');
+			submitLoading?.classList.remove('hidden');
+			if (submitBtn) submitBtn.setAttribute('disabled', 'true');
+
+			try {
+				const formData = new FormData(leadForm);
+				await fetch('/', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: new URLSearchParams(formData as any).toString()
+				});
+
+				// Show success message with animation
+				leadForm.classList.add('hidden');
+				formSuccess?.classList.remove('hidden');
+				formSuccess?.classList.add('animate-fade-in');
+			} catch (error) {
+				// Reset button on error
+				submitText?.classList.remove('hidden');
+				submitLoading?.classList.add('hidden');
+				if (submitBtn) submitBtn.removeAttribute('disabled');
+				alert('Something went wrong. Please try again.');
+			}
+		});
 	</script>
 </BaseLayout>

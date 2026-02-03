@@ -1,8 +1,33 @@
 @import "tailwindcss";
 
+/* Custom font for hero */
+@font-face {
+  font-family: "Jukebox Johnny";
+  src: url("/fonts/TAYJukeboxJohnny.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tay Highbeams";
+  src: url("/fonts/TAYHighbeamsRegular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tay Highbeams";
+  src: url("/fonts/TAYHighbeams-Italic.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
   --color-bg: #f8f7f2;
-  --color-text: #0e0e0e;
+  --color-text: #234C2E;
   --color-muted: #5c5c5c;
   --color-border: #1a1a1a;
   --color-accent: #0f3b2f;
@@ -20,7 +45,12 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -102,4 +132,20 @@ model-viewer.loaded .model-loader {
 
 .shimmer-overlay.shimmer-backward {
   animation: shimmer-left 3.6s ease-in-out forwards;
+}
+
+/* Fade in animation for form success */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
 }
