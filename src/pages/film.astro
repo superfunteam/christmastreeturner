@@ -9,8 +9,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="Christmas Tree Turner: The Film — Coming Soon" />
 		<title>Christmas Tree Turner: The Film</title>
+
+		<!-- Favicons -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Christmas Tree Turner: The Film" />
+		<meta property="og:description" content="A documentary about a Texas family's hunt for the origins of a mechanical Christmas Tree Turner. Coming Soon." />
+		<meta property="og:image" content="https://christmastreeturner.com/images/unfurl.png" />
+		<meta property="og:url" content="https://christmastreeturner.com/film" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Christmas Tree Turner: The Film" />
+		<meta name="twitter:description" content="A documentary about a Texas family's hunt for the origins of a mechanical Christmas Tree Turner. Coming Soon." />
+		<meta name="twitter:image" content="https://christmastreeturner.com/images/unfurl.png" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400&display=swap" />
@@ -32,7 +48,7 @@
 				background: var(--bg);
 				color: var(--green);
 				font-family: 'VT323', 'IBM Plex Mono', monospace;
-				overflow: hidden;
+				overflow-x: hidden;
 			}
 
 			/* Scanlines overlay */
@@ -62,17 +78,17 @@
 			}
 
 			.terminal {
-				min-height: 100vh;
+				height: 100vh;
+				padding: 2rem;
+				padding-bottom: 80px;
+				overflow-y: auto;
 				display: flex;
 				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				padding: 2rem;
-				padding-top: 10vh;
 			}
 
 			.content {
-				max-width: 720px;
+				margin-top: auto;
+				max-width: 100%;
 				width: 100%;
 				text-shadow:
 					0 0 4px rgba(57, 255, 20, 0.6),
@@ -80,21 +96,32 @@
 			}
 
 			.title {
-				font-size: clamp(32px, 8vw, 64px);
+				font-size: clamp(28px, 6vw, 48px);
 				line-height: 1.1;
 				margin-bottom: 0.5em;
 				letter-spacing: 0.05em;
 			}
 
 			.subtitle {
-				font-size: clamp(24px, 5vw, 32px);
-				margin-bottom: 2em;
+				font-size: clamp(20px, 4vw, 28px);
+				margin-bottom: 1.5em;
 				opacity: 0.9;
 			}
 
+			.person-block {
+				margin-bottom: 1.5em;
+				display: flex;
+				gap: 1.5em;
+				align-items: flex-start;
+			}
+
+			.person-info {
+				min-width: 180px;
+			}
+
 			.credits {
-				font-size: clamp(18px, 4vw, 24px);
-				line-height: 1.8;
+				font-size: clamp(16px, 3vw, 22px);
+				line-height: 1.6;
 			}
 
 			.credits .name {
@@ -105,14 +132,26 @@
 				display: block;
 				opacity: 0.6;
 				font-size: 0.85em;
-				margin-bottom: 0.5em;
-				padding-bottom: 0.5em;
-				border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+			}
+
+			.portrait {
+				font-size: 4px;
+				line-height: 1;
+				letter-spacing: 0;
+				white-space: pre;
+				opacity: 0.8;
+				display: none;
+			}
+
+			@media (min-width: 768px) {
+				.portrait {
+					display: block;
+				}
 			}
 
 			.meta {
-				margin-top: 2em;
-				font-size: clamp(16px, 3vw, 20px);
+				margin-top: 1.5em;
+				font-size: clamp(14px, 2.5vw, 18px);
 				opacity: 0.7;
 				line-height: 1.6;
 			}
@@ -161,15 +200,6 @@
 					0 0 16px rgba(57, 255, 20, 0.6);
 			}
 
-			/* Hidden until typed */
-			.typed-content {
-				visibility: hidden;
-			}
-
-			.typed-content.visible {
-				visibility: visible;
-			}
-
 			/* Reduced motion */
 			@media (prefers-reduced-motion: reduce) {
 				.cursor {
@@ -187,37 +217,107 @@
 			</div>
 		</div>
 
-		<a href="/" class="back-link">← Return to main site</a>
+		<a href="/" class="back-link">&larr; Return to main site</a>
 
 		<script>
-			const lines = [
-				{ text: 'CHRISTMAS TREE TURNER: THE FILM', class: 'title' },
-				{ text: 'COMING SOON', class: 'subtitle' },
-				{ text: '', class: 'spacer' },
-				{ text: 'Brandon Gray', class: 'name' },
-				{ text: 'Director', class: 'role' },
-				{ text: '', class: 'spacer' },
-				{ text: 'Clark Wimberly', class: 'name' },
-				{ text: 'Host', class: 'role' },
-				{ text: '', class: 'spacer' },
-				{ text: 'Matt Manchester', class: 'name' },
-				{ text: 'Host', class: 'role' },
-				{ text: '', class: 'spacer' },
-				{ text: 'Al', class: 'name' },
-				{ text: 'Electrician', class: 'role' },
-				{ text: '', class: 'spacer' },
-				{ text: 'David Decoster', class: 'name' },
-				{ text: 'Artist', class: 'role' },
-				{ text: '', class: 'spacer' },
-				{ text: 'Filming: February / March / April', class: 'meta' },
-				{ text: 'Target Release: July', class: 'meta' },
-				{ text: '', class: 'spacer' },
-				{ text: 'Contact clark@superfun.games if needed', class: 'meta' },
+			const people = [
+				{ name: 'Brandon Gray', role: 'Director', portrait: '/portraits/brandon.txt' },
+				{ name: 'Clark Wimberly', role: 'Host', portrait: '/portraits/clark.txt' },
+				{ name: 'Matt Manchester', role: 'Host', portrait: '/portraits/matt.txt' },
+				{ name: 'Al', role: 'Electrician', portrait: '/portraits/al.txt' },
+				{ name: 'David Decoster', role: 'Artist', portrait: '/portraits/david.txt' },
 			];
 
+			// Fetch portrait files
+			async function fetchPortrait(url: string | null): Promise<string | null> {
+				if (!url) return null;
+				try {
+					const response = await fetch(url);
+					return await response.text();
+				} catch {
+					return null;
+				}
+			}
+
+			const terminal = document.querySelector('.terminal') as HTMLElement;
 			const output = document.getElementById('output');
 			const cursor = document.getElementById('cursor');
 			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			// Audio context for typing sounds
+			let audioContext: AudioContext | null = null;
+
+			function initAudio(): void {
+				if (!audioContext) {
+					audioContext = new AudioContext();
+				}
+			}
+
+			function playTypeSound(): void {
+				if (!audioContext || prefersReducedMotion) return;
+
+				const oscillator = audioContext.createOscillator();
+				const gainNode = audioContext.createGain();
+
+				const baseFreq = 800 + Math.random() * 200; // 800-1000 Hz
+				oscillator.frequency.setValueAtTime(baseFreq, audioContext.currentTime);
+				oscillator.type = 'square';
+
+				gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
+				gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.05);
+
+				oscillator.connect(gainNode);
+				gainNode.connect(audioContext.destination);
+
+				oscillator.start(audioContext.currentTime);
+				oscillator.stop(audioContext.currentTime + 0.05);
+			}
+
+			// Fax machine whine for portrait printing
+			let faxOscillator: OscillatorNode | null = null;
+			let faxGain: GainNode | null = null;
+
+			function startFaxSound(): void {
+				if (!audioContext || prefersReducedMotion) return;
+
+				faxOscillator = audioContext.createOscillator();
+				faxGain = audioContext.createGain();
+
+				faxOscillator.type = 'sawtooth';
+				faxOscillator.frequency.setValueAtTime(1400, audioContext.currentTime);
+
+				// Modulate frequency for that warbling fax sound
+				const lfo = audioContext.createOscillator();
+				const lfoGain = audioContext.createGain();
+				lfo.frequency.setValueAtTime(8, audioContext.currentTime); // 8Hz wobble
+				lfoGain.gain.setValueAtTime(200, audioContext.currentTime); // Frequency deviation
+				lfo.connect(lfoGain);
+				lfoGain.connect(faxOscillator.frequency);
+				lfo.start();
+
+				faxGain.gain.setValueAtTime(0.02, audioContext.currentTime);
+
+				faxOscillator.connect(faxGain);
+				faxGain.connect(audioContext.destination);
+
+				faxOscillator.start();
+			}
+
+			function stopFaxSound(): void {
+				if (faxGain && audioContext) {
+					faxGain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+				}
+				setTimeout(() => {
+					faxOscillator?.stop();
+					faxOscillator = null;
+					faxGain = null;
+				}, 150);
+			}
+
+			// Keep terminal scrolled to bottom
+			function scrollToBottom(): void {
+				terminal.scrollTop = terminal.scrollHeight;
+			}
 
 			// Random timing for organic feel
 			function randomBetween(min: number, max: number): number {
@@ -232,49 +332,185 @@
 				setTimeout(triggerFlicker, randomBetween(3000, 8000));
 			}
 
-			// Type a single character
-			async function typeChar(element: HTMLElement, char: string): Promise<void> {
+			// Type a single character with configurable speed
+			async function typeChar(element: HTMLElement, char: string, fast: boolean = false): Promise<void> {
 				return new Promise(resolve => {
 					element.textContent += char;
-					const delay = char === ' ' ? randomBetween(40, 80) : randomBetween(30, 60);
+					scrollToBottom();
+					if (char !== ' ') playTypeSound();
+					const baseDelay = char === ' ' ? randomBetween(40, 80) : randomBetween(30, 60);
+					const delay = fast ? Math.floor(baseDelay / 4) : baseDelay;
 					setTimeout(resolve, prefersReducedMotion ? 0 : delay);
 				});
 			}
 
-			// Type a full line
-			async function typeLine(text: string, className: string): Promise<void> {
-				if (className === 'spacer') {
-					const br = document.createElement('br');
-					output?.appendChild(br);
-					return;
-				}
-
-				const wrapper = document.createElement('div');
-				wrapper.className = 'credits';
-
-				const span = document.createElement('span');
-				span.className = className;
-				wrapper.appendChild(span);
-				output?.appendChild(wrapper);
-
+			// Type text into an element
+			async function typeText(element: HTMLElement, text: string, fast: boolean = false): Promise<void> {
 				if (prefersReducedMotion) {
-					span.textContent = text;
+					element.textContent = text;
 				} else {
 					for (const char of text) {
-						await typeChar(span, char);
+						await typeChar(element, char, fast);
 					}
 				}
 			}
 
-			// Main typing sequence
-			async function typeAll(): Promise<void> {
-				for (let i = 0; i < lines.length; i++) {
-					const line = lines[i];
-					await typeLine(line.text, line.class);
-
-					if (!prefersReducedMotion && line.class !== 'spacer') {
-						await new Promise(resolve => setTimeout(resolve, randomBetween(400, 700)));
+			// Type a portrait line by line (very fast)
+			async function typePortrait(element: HTMLElement, portraitText: string): Promise<void> {
+				const lines = portraitText.split('\n');
+				if (prefersReducedMotion) {
+					element.textContent = portraitText;
+					scrollToBottom();
+				} else {
+					startFaxSound();
+					for (const line of lines) {
+						element.textContent += line + '\n';
+						scrollToBottom();
+						await new Promise(resolve => setTimeout(resolve, randomBetween(10, 30)));
 					}
+					stopFaxSound();
+				}
+			}
+
+			// Slow typing for intro lines
+			async function typeTextSlow(element: HTMLElement, text: string): Promise<void> {
+				if (prefersReducedMotion) {
+					element.textContent = text;
+					scrollToBottom();
+				} else {
+					for (const char of text) {
+						element.textContent += char;
+						scrollToBottom();
+						await new Promise(resolve => setTimeout(resolve, randomBetween(60, 120)));
+					}
+				}
+			}
+
+			async function typeAll(): Promise<void> {
+				// Blinky intro sequence
+				const introLines = [
+					'Loading Christmas memories...',
+					'Contacting USPTO...',
+					'Digging thru history...',
+				];
+
+				for (const line of introLines) {
+					const introDiv = document.createElement('div');
+					introDiv.className = 'credits';
+					const introSpan = document.createElement('span');
+					introSpan.className = 'meta';
+					introDiv.appendChild(introSpan);
+					output?.appendChild(introDiv);
+					await typeTextSlow(introSpan, line);
+					await new Promise(resolve => setTimeout(resolve, randomBetween(800, 1200)));
+				}
+
+				// Clear intro and pause
+				await new Promise(resolve => setTimeout(resolve, 500));
+				if (output) output.innerHTML = '';
+
+				// Title
+				const titleDiv = document.createElement('div');
+				titleDiv.className = 'credits';
+				const titleSpan = document.createElement('span');
+				titleSpan.className = 'title';
+				titleDiv.appendChild(titleSpan);
+				output?.appendChild(titleDiv);
+				await typeText(titleSpan, 'CHRISTMAS TREE TURNER: THE FILM');
+				await new Promise(resolve => setTimeout(resolve, randomBetween(300, 500)));
+
+				// Subtitle
+				const subDiv = document.createElement('div');
+				subDiv.className = 'credits';
+				const subSpan = document.createElement('span');
+				subSpan.className = 'subtitle';
+				subDiv.appendChild(subSpan);
+				output?.appendChild(subDiv);
+				await typeText(subSpan, 'COMING SOON');
+				await new Promise(resolve => setTimeout(resolve, randomBetween(400, 600)));
+
+				// Spacer
+				output?.appendChild(document.createElement('br'));
+
+				// People with portraits
+				for (const person of people) {
+					// Fetch portrait for this person
+					const portraitText = await fetchPortrait(person.portrait);
+
+					const block = document.createElement('div');
+					block.className = 'person-block';
+
+					const infoDiv = document.createElement('div');
+					infoDiv.className = 'person-info';
+
+					const nameDiv = document.createElement('div');
+					nameDiv.className = 'credits name';
+					infoDiv.appendChild(nameDiv);
+
+					const roleDiv = document.createElement('div');
+					roleDiv.className = 'credits role';
+					infoDiv.appendChild(roleDiv);
+
+					block.appendChild(infoDiv);
+
+					// Only add portrait element if person has one
+					let portraitPre: HTMLPreElement | null = null;
+					if (portraitText) {
+						// Empty line before portrait
+						const spacerDiv = document.createElement('div');
+						spacerDiv.innerHTML = '&nbsp;';
+						infoDiv.appendChild(spacerDiv);
+
+						portraitPre = document.createElement('pre');
+						portraitPre.className = 'portrait';
+						portraitPre.style.fontSize = '4px';
+						block.appendChild(portraitPre);
+					}
+
+					output?.appendChild(block);
+
+					// Type name
+					await typeText(nameDiv, person.name);
+					await new Promise(resolve => setTimeout(resolve, randomBetween(100, 200)));
+
+					// Type role
+					await typeText(roleDiv, person.role);
+
+					// Type portrait if exists
+					if (portraitPre && portraitText) {
+						await typePortrait(portraitPre, portraitText);
+					}
+
+					// 2 empty lines before next person
+					output?.appendChild(document.createElement('br'));
+					output?.appendChild(document.createElement('br'));
+
+					await new Promise(resolve => setTimeout(resolve, randomBetween(300, 500)));
+				}
+
+				// Meta info
+				output?.appendChild(document.createElement('br'));
+
+				const metaLines = [
+					'Filming: February / March / April',
+					'Target Release: July',
+					'',
+					'Contact clark@superfun.games if needed',
+				];
+
+				for (const line of metaLines) {
+					if (line === '') {
+						output?.appendChild(document.createElement('br'));
+						continue;
+					}
+					const metaDiv = document.createElement('div');
+					metaDiv.className = 'credits';
+					const metaSpan = document.createElement('span');
+					metaSpan.className = 'meta';
+					metaDiv.appendChild(metaSpan);
+					output?.appendChild(metaDiv);
+					await typeText(metaSpan, line);
+					await new Promise(resolve => setTimeout(resolve, randomBetween(200, 400)));
 				}
 
 				// Show cursor at end
@@ -283,8 +519,13 @@
 				}
 			}
 
+			// Initialize audio on user interaction
+			document.addEventListener('click', initAudio, { once: true });
+			document.addEventListener('keydown', initAudio, { once: true });
+
 			// Start
 			setTimeout(() => {
+				initAudio();
 				typeAll();
 				if (!prefersReducedMotion) {
 					setTimeout(triggerFlicker, randomBetween(3000, 8000));
