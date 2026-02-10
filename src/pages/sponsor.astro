@@ -1,0 +1,189 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title="Become a Sponsor — ChristmasTreeTurner.com"
+	description="Support the search for the origins of a full-size mechanical Christmas Tree Turner. Four sponsorship opportunities available."
+>
+	<main id="main-content" class="flex flex-col gap-16">
+		<!-- Header -->
+		<div class="mb-12">
+			<a href="/" class="font-mono text-sm tracking-widest uppercase text-muted hover:text-text transition-colors mb-6 inline-block">&larr; Back to Home</a>
+			<h1 class="uppercase tracking-tight text-4xl md:text-7xl italic mb-4 text-red" style="font-family: 'Tay Highbeams', sans-serif;">Become a Sponsor</h1>
+			<p class="text-lg max-w-2xl mb-8">Help a Texas family uncover their history. Each sponsorship is $750 and directly funds a piece of this mystery hunt. In return, you get permanent recognition on the site, in any media coverage, and the eternal gratitude of people who care way too much about a spinning Christmas tree stand.</p>
+		</div>
+
+		<!-- Sponsor Cards -->
+		<div class="grid md:grid-cols-2 gap-6 mb-16">
+			<!-- Research Partner -->
+			<div class="border border-border bg-white p-6 flex flex-col gap-4">
+				<div class="flex justify-between items-start">
+					<h2 class="font-display uppercase tracking-widest text-2xl m-0">Research Partner</h2>
+					<span class="text-3xl font-display text-accent">$750</span>
+				</div>
+				<p>Fund the detective work. Archive visits, microfilm access, and trips to Milwaukee libraries—plus AI tools to organize findings and connect the dots across hundreds of leads.</p>
+				<ul class="font-mono text-xs tracking-widest uppercase text-muted grid gap-1">
+					<li>+ Named "Research Partner" on site</li>
+					<li>+ Credit in any documentary or media</li>
+					<li>+ First look at discoveries</li>
+				</ul>
+				<a href="#sponsor-form" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit mt-auto">Become Research Partner</a>
+			</div>
+
+			<!-- Storage -->
+			<div class="border border-border bg-white p-6 flex flex-col gap-4">
+				<div class="flex justify-between items-start">
+					<h2 class="font-display uppercase tracking-widest text-2xl m-0">Storage Partner</h2>
+					<span class="text-3xl font-display text-accent">$750</span>
+				</div>
+				<p>Keep the project online. Covers hosting, file storage, and servers for all the scanned documents, photos, and 3D renders.</p>
+				<ul class="font-mono text-xs tracking-widest uppercase text-muted grid gap-1">
+					<li>+ Named "Storage Partner" on site</li>
+					<li>+ Credit in any documentary or media</li>
+					<li>+ Private viewing opportunity (in TX)</li>
+				</ul>
+				<a href="#sponsor-form" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit mt-auto">Become Storage Partner</a>
+			</div>
+
+			<!-- Community -->
+			<div class="border border-border bg-white p-6 flex flex-col gap-4">
+				<div class="flex justify-between items-start">
+					<h2 class="font-display uppercase tracking-widest text-2xl m-0">Community</h2>
+					<span class="text-3xl font-display text-accent">$750</span>
+				</div>
+				<p>Fund the bounty pool. Every verified lead earns a donation to a teacher or school, rewarding the internet detectives who help crack this case.</p>
+				<ul class="font-mono text-xs tracking-widest uppercase text-muted grid gap-1">
+					<li>+ Named "Community Sponsor" on site</li>
+					<li>+ Credit in any documentary or media</li>
+					<li>+ Updates on every bounty awarded</li>
+				</ul>
+				<a href="#sponsor-form" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit mt-auto">Sponsor Community</a>
+			</div>
+
+			<!-- Merch -->
+			<div class="border border-border bg-white p-6 flex flex-col gap-4">
+				<div class="flex justify-between items-start">
+					<h2 class="font-display uppercase tracking-widest text-2xl m-0">Merch</h2>
+					<span class="text-3xl font-display text-accent">$750</span>
+				</div>
+				<p>Cover the first production run. Hats, prints, stickers—your sponsorship funds the initial inventory so we can get merch into hands.</p>
+				<ul class="font-mono text-xs tracking-widest uppercase text-muted grid gap-1">
+					<li>+ Named "Merch Sponsor" on site</li>
+					<li>+ Credit in any documentary or media</li>
+					<li>+ Free merch pack (hat + framed print)</li>
+				</ul>
+				<a href="#sponsor-form" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit mt-auto">Sponsor Merch</a>
+			</div>
+		</div>
+
+		<!-- Referral Note -->
+		<div class="border-t border-border pt-8 mb-16">
+			<p class="font-mono text-sm tracking-widest uppercase text-muted mb-2">Know someone who might sponsor?</p>
+			<p class="text-lg">Refer a sponsor and earn a $50 bounty (donated to a teacher or school of your choice) when they commit. Just have them mention your name in the form below.</p>
+		</div>
+
+		<!-- Sponsor Form -->
+		<section id="sponsor-form" class="scroll-mt-8">
+			<div class="bg-accent text-white p-8 md:p-12 relative overflow-hidden">
+				<!-- Background schematic image -->
+				<div class="hidden md:block absolute top-0 right-0 bottom-0 w-1/2 pointer-events-none" aria-hidden="true">
+					<img src="/images/schema.webp" alt="" class="w-full h-full object-cover object-left-top mix-blend-multiply opacity-40" />
+				</div>
+
+				<h2 class="uppercase tracking-tight mb-3 text-3xl italic relative z-10" style="font-family: 'Tay Highbeams', sans-serif;">Contact Us</h2>
+				<p class="text-white/80 mb-8 max-w-2xl relative z-10">Interested in sponsoring? Have questions? Fill out the form below and we'll be in touch. No commitment required—just a conversation.</p>
+
+				<form id="sponsor-form-element" class="grid gap-5 max-w-2xl relative z-10" name="sponsors" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+					<input type="hidden" name="form-name" value="sponsors" />
+					<div class="hidden" aria-hidden="true">
+						<label for="bot-field">Don't fill this out</label>
+						<input id="bot-field" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="sponsor-name">Name</label>
+						<input class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="sponsor-name" name="name" type="text" autocomplete="name" required />
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="sponsor-email">Email</label>
+						<input class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="sponsor-email" name="email" type="email" autocomplete="email" required />
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="sponsor-interest">Which sponsorship interests you?</label>
+						<select class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="sponsor-interest" name="interest" required>
+							<option value="">Select one...</option>
+							<option value="research">Research ($750)</option>
+							<option value="storage">Storage ($750)</option>
+							<option value="community">Community ($750)</option>
+							<option value="merch">Merch ($750)</option>
+							<option value="multiple">Multiple / All of the above</option>
+							<option value="other">Other / Just curious</option>
+						</select>
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="sponsor-referral">Referred by (optional)</label>
+						<input class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="sponsor-referral" name="referral" type="text" placeholder="Name or email of person who referred you" />
+					</div>
+					<div>
+						<label class="font-mono text-xs tracking-widest uppercase block mb-2 text-white/70" for="sponsor-message">Message (optional)</label>
+						<textarea class="w-full border-0 p-4 font-serif bg-white text-text focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2" id="sponsor-message" name="message" rows="4" placeholder="Questions, ideas, or just say hi..."></textarea>
+					</div>
+					<button id="sponsor-submit-btn" class="bg-white text-accent px-6 py-4 font-mono text-sm uppercase tracking-widest hover:bg-white/90 transition-colors w-fit flex items-center gap-3" type="submit">
+						<span id="sponsor-submit-text">Send Message</span>
+						<span id="sponsor-submit-loading" class="hidden">
+							<svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+							</svg>
+						</span>
+					</button>
+				</form>
+
+				<div id="sponsor-form-success" class="hidden relative z-10">
+					<div class="bg-white/10 border border-white/20 p-6">
+						<h3 class="font-display uppercase tracking-widest text-xl mb-2">Message Sent!</h3>
+						<p class="text-white/80">Thanks for reaching out. We'll be in touch soon to talk about sponsorship opportunities.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		// Form submission with animated success
+		const sponsorForm = document.getElementById('sponsor-form-element') as HTMLFormElement;
+		const submitBtn = document.getElementById('sponsor-submit-btn');
+		const submitText = document.getElementById('sponsor-submit-text');
+		const submitLoading = document.getElementById('sponsor-submit-loading');
+		const formSuccess = document.getElementById('sponsor-form-success');
+
+		sponsorForm?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			// Show loading state
+			submitText?.classList.add('hidden');
+			submitLoading?.classList.remove('hidden');
+			if (submitBtn) submitBtn.setAttribute('disabled', 'true');
+
+			try {
+				const formData = new FormData(sponsorForm);
+				await fetch('/', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: new URLSearchParams(formData as any).toString()
+				});
+
+				// Show success message with animation
+				sponsorForm.classList.add('hidden');
+				formSuccess?.classList.remove('hidden');
+				formSuccess?.classList.add('animate-fade-in');
+			} catch (error) {
+				// Reset button on error
+				submitText?.classList.remove('hidden');
+				submitLoading?.classList.add('hidden');
+				if (submitBtn) submitBtn.removeAttribute('disabled');
+				alert('Something went wrong. Please try again.');
+			}
+		});
+	</script>
+</BaseLayout>

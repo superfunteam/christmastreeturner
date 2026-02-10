@@ -16,18 +16,44 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<!-- Hero Section -->
 		<section class="relative overflow-visible">
 			<div class="flex justify-between items-center mt-8 mb-3 relative z-20 italic" style="font-family: 'Tay Highbeams', sans-serif;">
-				<p class="uppercase text-sm md:text-xl tracking-tight" style="color: #8B2942;">Help a Texas family recover history</p>
+				<p class="uppercase text-sm md:text-xl tracking-tight text-red">Help a Texas family recover history</p>
+
+				<!-- Desktop Nav -->
 				<nav class="hidden md:flex gap-6 uppercase text-sm md:text-xl tracking-tight">
 					<a href="#overview" class="text-muted hover:text-text transition-colors">Overview</a>
 					<a href="#bounties" class="text-muted hover:text-text transition-colors">Bounties</a>
 					<a href="#faq" class="text-muted hover:text-text transition-colors">FAQs</a>
+					<a href="#merch" class="text-muted hover:text-text transition-colors">Shop</a>
 					<a href="#contact" class="text-muted hover:text-text transition-colors">Contact</a>
 				</nav>
+
+				<!-- Mobile Nav Button -->
+				<button id="mobile-nav-btn" class="md:hidden flex items-center gap-2 p-2 text-text font-mono text-xs uppercase tracking-widest" aria-label="Open menu">
+					<span>Menu</span>
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				</button>
 			</div>
-			<div class="grid grid-cols-1 gap-8 items-center relative overflow-visible">
-				<h1 class="uppercase text-7xl md:text-[11.5rem] tracking-wider leading-none md:leading-[0.85] my-24 relative z-20 md:max-w-3xl md:-ml-2" style="font-family: 'Jukebox Johnny', sans-serif;">Have You Seen Me?</h1>
-				<div class="relative w-full h-96 overflow-hidden bg-transparent pointer-events-none z-30
-				            md:absolute md:top-0 md:right-0 md:w-3/5 md:h-full md:-mr-32 md:overflow-visible">
+
+			<!-- Mobile Nav Overlay -->
+			<div id="mobile-nav" class="fixed inset-0 bg-bg z-50 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
+				<button id="mobile-nav-close" class="absolute top-6 right-6 p-2 text-text" aria-label="Close menu">
+					<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+				<nav class="flex flex-col items-center gap-6 uppercase text-2xl tracking-tight italic" style="font-family: 'Tay Highbeams', sans-serif;">
+					<a href="#overview" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Overview</a>
+					<a href="#bounties" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Bounties</a>
+					<a href="#faq" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">FAQs</a>
+					<a href="#merch" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Shop</a>
+					<a href="#contact" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Contact</a>
+				</nav>
+			</div>
+			<div class="relative overflow-visible min-h-[280px] md:min-h-0">
+				<h1 class="uppercase text-5xl md:text-[11.5rem] tracking-wider leading-none md:leading-[0.85] my-12 md:my-24 relative z-20 max-w-[55%] md:max-w-3xl md:-ml-2" style="font-family: 'Jukebox Johnny', sans-serif;">Have You Seen Me?</h1>
+				<div class="absolute top-0 right-0 w-3/5 h-full -mr-8 md:-mr-32 overflow-visible bg-transparent pointer-events-none z-30">
 					<model-viewer
 						id="turner-model"
 						class="absolute inset-0 w-full h-full bg-transparent pointer-events-auto"
@@ -52,10 +78,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 						<p class="font-mono text-sm tracking-widest uppercase text-muted">3D model requires WebGL. Fallback image displayed.</p>
 					</noscript>
 				</div>
-				<!-- Label positioned relative to the grid, not the overflowing model container -->
-				<div class="absolute top-4 right-4 md:top-20 md:right-8 z-30 pointer-events-none">
-					<div class="bg-white border border-border px-2 py-1 md:px-3 md:py-2 w-40 md:w-56 font-mono uppercase tracking-wider text-xs text-text shadow-md">
-						Preview render. See full details below.
+				<!-- Label positioned near the 3D model -->
+				<div class="absolute top-4 right-4 md:top-20 md:right-8 z-40 pointer-events-none">
+					<div class="bg-white border border-border px-2 py-1 md:px-3 md:py-2 w-28 md:w-56 font-mono uppercase tracking-wider text-[10px] md:text-xs text-text shadow-md">
+						Preview render<span class="hidden md:inline">. See full details below.</span>
 					</div>
 				</div>
 			</div>
@@ -330,6 +356,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 							<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: provenance + identifiable individuals.</p>
 							<a href="#contact" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">Donated to your chosen teacher or school</a>
 						</div>
+						<div class="border border-border p-5 bg-white grid gap-3">
+							<div class="text-3xl font-display text-accent">$50</div>
+							<h3 class="font-display uppercase tracking-widest m-0">Find a Sponsor</h3>
+							<p>Refer a sponsor for Research, Storage, Community, or Merch partnership ($750 each).</p>
+							<p class="font-mono text-sm tracking-widest uppercase text-muted">Verification: sponsor confirms and commits.</p>
+							<a href="/sponsor" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">View Sponsor Opportunities</a>
+						</div>
 					</div>
 					<p class="font-mono text-xs tracking-widest uppercase text-muted mt-4">
 						Bounties are paid as donations to a teacher or school of your choosing.
@@ -383,6 +416,65 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 					</div>
 				</div>
 			</div>
+		</section>
+
+		<!-- Merch -->
+		<section id="merch" class="border-t border-border pt-16 scroll-mt-8">
+			<h2 class="uppercase tracking-tight mb-3 text-3xl italic" style="font-family: 'Tay Highbeams', sans-serif;">Merch</h2>
+			<p class="text-lg mb-8 max-w-2xl">Can't help with the research but love Christmas shopping? We got you. These aren't great deals—they're <em>charitable</em> deals. Every purchase supports the magic of Christmas for a special Texas family, and a teacher or school close to your heart.</p>
+
+			<div class="grid md:grid-cols-2 gap-8">
+				<!-- Hat -->
+				<div class="border border-border bg-white">
+					<div class="aspect-square bg-white p-12">
+						<div id="hat-gallery" class="w-full h-full relative">
+							<img src="/art/hat-1.webp" alt="Green Christmas Tree Turner hat" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-700 opacity-100" data-index="0" />
+							<img src="/art/hat-2.webp" alt="Green Christmas Tree Turner hat - side view" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-700 opacity-0" data-index="1" />
+							<img src="/art/hat-3.webp" alt="Green Christmas Tree Turner hat - back view" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-700 opacity-0" data-index="2" />
+						</div>
+					</div>
+					<div class="p-5 grid gap-3">
+						<div class="flex justify-between items-start">
+							<h3 class="font-display uppercase tracking-widest text-xl m-0">The Turner Cap</h3>
+							<span class="text-2xl font-display text-accent">$40</span>
+						</div>
+						<p class="text-muted">Forest green dad hat. Embroidered patent diagram on front. "Have You Seen Me?" on back. One size fits most heads, all sizes of holiday spirit.</p>
+						<a href="#" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">Coming Soon</a>
+					</div>
+				</div>
+
+				<!-- Art Print -->
+				<div class="border border-border bg-white">
+					<div class="aspect-square bg-white p-12">
+						<div id="art-gallery" class="w-full h-full relative">
+							<img src="/art/frame-black-1.webp" alt="Framed patent art print - black frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-100" data-index="0" />
+							<img src="/art/frame-white-white-2.webp" alt="Framed patent art print - white on white" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="1" />
+							<img src="/art/frame-wood-3.webp" alt="Framed patent art print - wood frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="2" />
+							<img src="/art/frame-white-1.webp" alt="Framed patent art print - white frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="3" />
+							<img src="/art/frame-black-2.webp" alt="Framed patent art print - black frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="4" />
+							<img src="/art/frame-white-white-3.webp" alt="Framed patent art print - white on white" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="5" />
+							<img src="/art/frame-wood-1.webp" alt="Framed patent art print - wood frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="6" />
+							<img src="/art/frame-white-2.webp" alt="Framed patent art print - white frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="7" />
+							<img src="/art/frame-black-3.webp" alt="Framed patent art print - black frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="8" />
+							<img src="/art/frame-white-3.webp" alt="Framed patent art print - white frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="9" />
+							<img src="/art/frame-wood-2.webp" alt="Framed patent art print - wood frame" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="10" />
+							<img src="/art/frame-white-white-1.webp" alt="Framed patent art print - white on white" class="absolute inset-0 w-full h-full object-contain transition-opacity duration-1500 opacity-0" data-index="11" />
+						</div>
+					</div>
+					<div class="p-5 grid gap-3">
+						<div class="flex justify-between items-start">
+							<h3 class="font-display uppercase tracking-widest text-xl m-0">Patent Art Print</h3>
+							<span class="text-2xl font-display text-accent">$64</span>
+						</div>
+						<p class="text-muted">11×14" framed print of the original patent diagram. Available in white or black ink, with white, black, or natural wood frame. Looks great on a wall. Looks even better as a conversation starter.</p>
+						<a href="#" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity w-fit">Coming Soon</a>
+					</div>
+				</div>
+			</div>
+
+			<p class="font-mono text-xs tracking-widest uppercase text-muted mt-6">
+				Not a great deal. Not trying to be. 100% of profits support a Texas family's Christmas traditions and classroom donations.
+			</p>
 		</section>
 
 		<!-- Submit a Lead -->
@@ -768,5 +860,76 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				alert('Something went wrong. Please try again.');
 			}
 		});
+	</script>
+
+	<script>
+		// Merch gallery image cycling
+		function cycleGallery(galleryId: string, intervalMs: number) {
+			const gallery = document.getElementById(galleryId);
+			if (!gallery) return;
+
+			const images = gallery.querySelectorAll('img');
+			if (images.length === 0) return;
+
+			let currentIndex = 0;
+
+			setInterval(() => {
+				// Fade out current
+				images[currentIndex].classList.remove('opacity-100');
+				images[currentIndex].classList.add('opacity-0');
+
+				// Move to next
+				currentIndex = (currentIndex + 1) % images.length;
+
+				// Fade in next
+				images[currentIndex].classList.remove('opacity-0');
+				images[currentIndex].classList.add('opacity-100');
+			}, intervalMs);
+		}
+
+		// Hat: cycle every 4 seconds
+		cycleGallery('hat-gallery', 4000);
+
+		// Art print: cycle every 1.5 seconds
+		cycleGallery('art-gallery', 1500);
+	</script>
+
+	<script>
+		// Mobile nav
+		const mobileNavBtn = document.getElementById('mobile-nav-btn');
+		const mobileNav = document.getElementById('mobile-nav');
+		const mobileNavClose = document.getElementById('mobile-nav-close');
+		const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+		function openNav() {
+			mobileNav?.classList.remove('opacity-0', 'pointer-events-none');
+			mobileNav?.classList.add('opacity-100', 'pointer-events-auto');
+			document.body.style.overflow = 'hidden';
+
+			// Stagger animate links
+			mobileNavLinks.forEach((link, i) => {
+				setTimeout(() => {
+					link.classList.remove('translate-y-4', 'opacity-0');
+					link.classList.add('translate-y-0', 'opacity-100');
+				}, 50 + i * 75);
+			});
+		}
+
+		function closeNav() {
+			mobileNavLinks.forEach((link) => {
+				link.classList.add('translate-y-4', 'opacity-0');
+				link.classList.remove('translate-y-0', 'opacity-100');
+			});
+
+			setTimeout(() => {
+				mobileNav?.classList.add('opacity-0', 'pointer-events-none');
+				mobileNav?.classList.remove('opacity-100', 'pointer-events-auto');
+				document.body.style.overflow = '';
+			}, 150);
+		}
+
+		mobileNavBtn?.addEventListener('click', openNav);
+		mobileNavClose?.addEventListener('click', closeNav);
+		mobileNavLinks.forEach(link => link.addEventListener('click', closeNav));
 	</script>
 </BaseLayout>
