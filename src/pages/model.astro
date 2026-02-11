@@ -1,0 +1,333 @@
+---
+// Interactive 3D model viewer - procedural Three.js model of the Spincraft Heirloom Christmas Tree Turner
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#0f3b2f" />
+		<meta name="description" content="Interactive 3D model of the Spincraft Heirloom Revolving Christmas Tree Stand — explore every part" />
+		<title>Christmas Tree Turner — 3D Model Viewer</title>
+
+		<!-- Favicons -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Christmas Tree Turner — 3D Model Viewer" />
+		<meta property="og:description" content="Interactive 3D model of the Spincraft Heirloom Revolving Christmas Tree Stand" />
+		<meta property="og:image" content="https://christmastreeturner.com/images/unfurl.png" />
+		<meta property="og:url" content="https://christmastreeturner.com/model" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Christmas Tree Turner — 3D Model Viewer" />
+		<meta name="twitter:description" content="Interactive 3D model of the Spincraft Heirloom Revolving Christmas Tree Stand" />
+		<meta name="twitter:image" content="https://christmastreeturner.com/images/unfurl.png" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@400;500&display=swap" />
+
+		<style>
+			:root {
+				--bg: #f8f7f2;
+				--text: #234C2E;
+				--muted: #5c5c5c;
+				--border: #1a1a1a;
+				--accent: #0f3b2f;
+				--well: #f0f0f0;
+			}
+
+			*, *::before, *::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			html, body {
+				height: 100%;
+				overflow: hidden;
+				background: var(--bg);
+				color: var(--text);
+				font-family: 'IBM Plex Mono', monospace;
+			}
+
+			#viewer-container {
+				position: fixed;
+				inset: 0;
+				z-index: 0;
+			}
+
+			/* Loading spinner */
+			.loader {
+				position: fixed;
+				inset: 0;
+				z-index: 50;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: var(--bg);
+				transition: opacity 0.5s ease;
+			}
+
+			.loader.hidden {
+				opacity: 0;
+				pointer-events: none;
+			}
+
+			.spinner {
+				width: 32px;
+				height: 32px;
+				border: 2px solid var(--border);
+				border-top-color: transparent;
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+			}
+
+			@keyframes spin {
+				to { transform: rotate(360deg); }
+			}
+
+			/* Back link */
+			.back-link {
+				position: fixed;
+				top: 1.25rem;
+				left: 1.25rem;
+				z-index: 20;
+				color: var(--text);
+				text-decoration: none;
+				font-size: 12px;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				font-family: 'IBM Plex Mono', monospace;
+				background: rgba(248, 247, 242, 0.85);
+				padding: 6px 12px;
+				border: 1px solid var(--border);
+				transition: background 0.2s;
+			}
+
+			.back-link:hover {
+				background: rgba(248, 247, 242, 1);
+			}
+
+			/* Control bar */
+			.control-bar {
+				position: fixed;
+				bottom: 1.25rem;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 20;
+				display: flex;
+				gap: 1px;
+				background: var(--border);
+				border: 1px solid var(--border);
+			}
+
+			.control-btn {
+				background: rgba(248, 247, 242, 0.92);
+				color: var(--text);
+				border: none;
+				padding: 8px 16px;
+				font-family: 'IBM Plex Mono', monospace;
+				font-size: 11px;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				cursor: pointer;
+				transition: background 0.15s, color 0.15s;
+				white-space: nowrap;
+			}
+
+			.control-btn:hover {
+				background: var(--well);
+			}
+
+			.control-btn.active {
+				background: var(--accent);
+				color: #fff;
+			}
+
+			/* Part info panel */
+			.info-panel {
+				position: fixed;
+				top: 1.25rem;
+				right: 1.25rem;
+				z-index: 20;
+				background: rgba(248, 247, 242, 0.95);
+				border: 1px solid var(--border);
+				padding: 16px 20px;
+				max-width: 280px;
+				opacity: 0;
+				transform: translateY(-8px);
+				transition: opacity 0.25s ease, transform 0.25s ease;
+				pointer-events: none;
+			}
+
+			.info-panel.visible {
+				opacity: 1;
+				transform: translateY(0);
+				pointer-events: auto;
+			}
+
+			.info-panel h3 {
+				font-family: 'Oswald', sans-serif;
+				font-size: 14px;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				margin-bottom: 6px;
+				color: var(--accent);
+			}
+
+			.info-panel p {
+				font-size: 12px;
+				line-height: 1.5;
+				color: var(--muted);
+			}
+
+			/* Mobile adjustments */
+			@media (max-width: 640px) {
+				.control-bar {
+					bottom: 0.75rem;
+					left: 0.75rem;
+					right: 0.75rem;
+					transform: none;
+					flex-wrap: wrap;
+				}
+
+				.control-btn {
+					flex: 1 1 auto;
+					padding: 10px 8px;
+					font-size: 10px;
+				}
+
+				.info-panel {
+					top: auto;
+					bottom: 4.5rem;
+					right: 0.75rem;
+					left: 0.75rem;
+					max-width: none;
+				}
+
+				.back-link {
+					top: 0.75rem;
+					left: 0.75rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Loading spinner -->
+		<div class="loader" id="loader">
+			<div class="spinner"></div>
+		</div>
+
+		<!-- Back link -->
+		<a href="/" class="back-link">&larr; Back to Home</a>
+
+		<!-- 3D Viewer container -->
+		<div id="viewer-container"></div>
+
+		<!-- Part info panel -->
+		<div class="info-panel" id="info-panel">
+			<h3 id="info-name"></h3>
+			<p id="info-desc"></p>
+		</div>
+
+		<!-- Control bar -->
+		<div class="control-bar">
+			<button class="control-btn" id="btn-labels">Labels</button>
+			<button class="control-btn" id="btn-explode">Exploded View</button>
+			<button class="control-btn active" id="btn-rotate">Auto-Rotate</button>
+			<button class="control-btn" id="btn-reset">Reset Camera</button>
+		</div>
+
+		<script>
+			import { TurnerModelViewer } from '../lib/turner-model/index';
+
+			const container = document.getElementById('viewer-container')!;
+			const loader = document.getElementById('loader')!;
+			const infoPanel = document.getElementById('info-panel')!;
+			const infoName = document.getElementById('info-name')!;
+			const infoDesc = document.getElementById('info-desc')!;
+			const btnLabels = document.getElementById('btn-labels') as HTMLButtonElement;
+			const btnExplode = document.getElementById('btn-explode') as HTMLButtonElement;
+			const btnRotate = document.getElementById('btn-rotate') as HTMLButtonElement;
+			const btnReset = document.getElementById('btn-reset') as HTMLButtonElement;
+
+			// Initialize viewer
+			const viewer = new TurnerModelViewer(container);
+
+			// Hide loader once first frame renders
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					loader.classList.add('hidden');
+				});
+			});
+
+			// Part hover — show info panel
+			let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
+
+			viewer.onPartHover = (partId: string | null) => {
+				if (hoverTimeout) clearTimeout(hoverTimeout);
+
+				if (partId) {
+					const info = viewer.getPartInfo(partId);
+					if (info) {
+						infoName.textContent = info.name;
+						infoDesc.textContent = info.description;
+						infoPanel.classList.add('visible');
+					}
+				} else {
+					// Small delay before hiding to avoid flicker
+					hoverTimeout = setTimeout(() => {
+						infoPanel.classList.remove('visible');
+					}, 150);
+				}
+			};
+
+			// Part click — also show/keep info
+			viewer.onPartClick = (partId: string | null) => {
+				if (partId) {
+					const info = viewer.getPartInfo(partId);
+					if (info) {
+						infoName.textContent = info.name;
+						infoDesc.textContent = info.description;
+						infoPanel.classList.add('visible');
+					}
+				} else {
+					infoPanel.classList.remove('visible');
+				}
+			};
+
+			// Control buttons
+			btnLabels.addEventListener('click', () => {
+				viewer.toggleLabels();
+				btnLabels.classList.toggle('active', viewer.labelsVisible);
+			});
+
+			btnExplode.addEventListener('click', () => {
+				viewer.toggleExploded();
+				btnExplode.classList.toggle('active', viewer.isExploded);
+			});
+
+			btnRotate.addEventListener('click', () => {
+				const newState = !viewer.autoRotating;
+				viewer.setAutoRotate(newState);
+				btnRotate.classList.toggle('active', newState);
+			});
+
+			btnReset.addEventListener('click', () => {
+				viewer.resetCamera();
+			});
+
+			// Cleanup on navigation (Astro client-side routing)
+			document.addEventListener('astro:before-swap', () => {
+				viewer.dispose();
+			});
+		</script>
+	</body>
+</html>

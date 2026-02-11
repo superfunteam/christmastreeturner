@@ -54,34 +54,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<div class="relative overflow-visible min-h-[280px] md:min-h-0">
 				<h1 class="uppercase text-5xl md:text-[11.5rem] tracking-wider leading-none md:leading-[0.85] my-12 md:my-24 relative z-20 max-w-[55%] md:max-w-3xl md:-ml-2" style="font-family: 'Jukebox Johnny', sans-serif;">Have You Seen Me?</h1>
 				<div class="absolute top-0 right-0 w-3/5 h-full -mr-8 md:-mr-32 overflow-visible bg-transparent pointer-events-none z-30">
-					<model-viewer
-						id="turner-model"
-						class="absolute inset-0 w-full h-full bg-transparent pointer-events-auto"
-						src="/christmas-tree-turner"
-						alt="3D model of the Christmas Tree Turner."
-						auto-rotate
-						rotation-per-second="8deg"
-						camera-controls
-						camera-orbit="-217deg 55deg 3.5m"
-						orientation="0 0 40deg"
-						min-camera-orbit="auto auto 2.3m"
-						max-camera-orbit="auto auto 5.9m"
-						shadow-intensity="0"
-						interaction-prompt="none"
-						loading="eager"
+					<div
+						id="hero-model"
+						class="absolute bg-transparent pointer-events-auto"
+						style="inset: -40%; width: 180%; height: 180%; margin-left: 12vw; margin-top: -5vw;"
 					>
-						<div class="model-loader absolute inset-0 flex items-center justify-center">
+						<div id="hero-model-loader" class="absolute inset-0 flex items-center justify-center">
 							<div class="w-12 h-12 border-2 border-border border-t-accent rounded-full animate-spin"></div>
 						</div>
-					</model-viewer>
+					</div>
 					<noscript>
 						<p class="font-mono text-sm tracking-widest uppercase text-muted">3D model requires WebGL. Fallback image displayed.</p>
 					</noscript>
-				</div>
-				<!-- Label positioned near the 3D model -->
-				<div class="absolute top-4 right-4 md:top-20 md:right-8 z-40 pointer-events-none">
-					<div class="bg-white border border-border px-2 py-1 md:px-3 md:py-2 w-28 md:w-56 font-mono uppercase tracking-wider text-[10px] md:text-xs text-text shadow-md">
-						Preview render<span class="hidden md:inline">. See full details below.</span>
+					<!-- Model controls + info card -->
+					<div class="absolute bottom-[15%] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-auto">
+						<!-- Part info card (appears on hover/click) -->
+						<div id="hero-info-card" class="bg-white/95 border border-border px-3 py-2 w-48 md:w-56 shadow-md opacity-0 translate-y-[4px] transition-all duration-200 pointer-events-none">
+							<p id="hero-info-name" class="font-display uppercase tracking-wider text-[11px] md:text-xs text-accent mb-1"></p>
+							<p id="hero-info-desc" class="font-mono text-[9px] md:text-[10px] leading-relaxed text-muted"></p>
+						</div>
+						<!-- Control pills -->
+						<div class="flex gap-[1px] bg-border border border-border">
+							<button id="hero-btn-labels" class="bg-white/90 hover:bg-well text-text px-2 py-1 md:px-3 md:py-1.5 font-mono uppercase tracking-wider text-[9px] md:text-[10px] transition-colors" title="Toggle labels">Labels</button>
+							<button id="hero-btn-explode" class="bg-white/90 hover:bg-well text-text px-2 py-1 md:px-3 md:py-1.5 font-mono uppercase tracking-wider text-[9px] md:text-[10px] transition-colors" title="Exploded view">Explode</button>
+							<button id="hero-btn-reset" class="bg-white/90 hover:bg-well text-text px-2 py-1 md:px-3 md:py-1.5 font-mono uppercase tracking-wider text-[9px] md:text-[10px] transition-colors" title="Reset camera">Reset</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -613,6 +610,96 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			Download Full Size
 		</a>
 	</div>
+
+	<script>
+		// Hero 3D model viewer
+		import { HeroModelViewer } from '../lib/turner-model/hero-viewer';
+
+		const heroContainer = document.getElementById('hero-model');
+		const heroLoader = document.getElementById('hero-model-loader');
+		const infoCard = document.getElementById('hero-info-card');
+		const infoName = document.getElementById('hero-info-name');
+		const infoDesc = document.getElementById('hero-info-desc');
+		const btnLabels = document.getElementById('hero-btn-labels') as HTMLButtonElement;
+		const btnExplode = document.getElementById('hero-btn-explode') as HTMLButtonElement;
+		const btnReset = document.getElementById('hero-btn-reset') as HTMLButtonElement;
+
+		if (heroContainer) {
+			const heroViewer = new HeroModelViewer(heroContainer);
+
+			// Hide loader after first frame
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					if (heroLoader) {
+						heroLoader.style.transition = 'opacity 0.4s ease';
+						heroLoader.style.opacity = '0';
+						setTimeout(() => heroLoader.remove(), 400);
+					}
+				});
+			});
+
+			// Part hover/click → info card
+			let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
+
+			heroViewer.onPartHover = (partId: string | null) => {
+				if (hoverTimeout) clearTimeout(hoverTimeout);
+				if (partId && infoCard && infoName && infoDesc) {
+					const info = heroViewer.getPartInfo(partId);
+					if (info) {
+						infoName.textContent = info.name;
+						infoDesc.textContent = info.description;
+						infoCard.style.opacity = '1';
+						infoCard.style.transform = 'translateY(0)';
+					}
+				} else {
+					hoverTimeout = setTimeout(() => {
+						if (infoCard) {
+							infoCard.style.opacity = '0';
+							infoCard.style.transform = 'translateY(-4px)';
+						}
+					}, 150);
+				}
+			};
+
+			heroViewer.onPartClick = (partId: string | null) => {
+				if (partId && infoCard && infoName && infoDesc) {
+					const info = heroViewer.getPartInfo(partId);
+					if (info) {
+						infoName.textContent = info.name;
+						infoDesc.textContent = info.description;
+						infoCard.style.opacity = '1';
+						infoCard.style.transform = 'translateY(0)';
+					}
+				}
+			};
+
+			// Active state helper
+			const toggle = (btn: HTMLButtonElement, active: boolean) => {
+				btn.style.background = active ? '#0f3b2f' : '';
+				btn.style.color = active ? '#fff' : '';
+			};
+
+			// Control buttons
+			btnLabels?.addEventListener('click', () => {
+				heroViewer.toggleLabels();
+				toggle(btnLabels, heroViewer.labelsVisible);
+			});
+
+			btnExplode?.addEventListener('click', () => {
+				heroViewer.toggleExploded();
+				toggle(btnExplode, heroViewer.isExploded);
+			});
+
+			btnReset?.addEventListener('click', () => {
+				heroViewer.resetCamera();
+			});
+
+			// Cleanup on Astro navigation
+			document.addEventListener('astro:before-swap', () => {
+				heroViewer.dispose();
+			}, { once: true });
+		}
+	</script>
 
 	<script>
 		// Cascading shimmer effect - wave across all objects with 1s overlap
