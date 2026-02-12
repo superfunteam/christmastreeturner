@@ -83,6 +83,11 @@ export class TurnerModelViewer {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     this.scene.add(ambientLight);
 
+    // Underside fill light to reveal embossed details on base bottom
+    const underLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    underLight.position.set(0, -10, 0);
+    this.scene.add(underLight);
+
     // Ground plane (shadow catcher)
     const groundGeo = new THREE.PlaneGeometry(60, 60);
     const groundMat = new THREE.ShadowMaterial({ opacity: 0.08 });

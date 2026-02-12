@@ -72,6 +72,11 @@ export class HeroModelViewer {
     this.scene.add(dirLight);
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.4));
 
+    // Underside fill light to reveal embossed details on base bottom
+    const underLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    underLight.position.set(0, -10, 0);
+    this.scene.add(underLight);
+
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;

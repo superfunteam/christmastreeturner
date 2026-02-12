@@ -64,7 +64,7 @@ export function createLowerBase(): THREE.Group {
   }
 
   // Embossed text on bottom — centered in a quadrant between two ridges
-  const embossRadius = (BASE_RADIUS - 0.5) * 0.55;
+  const embossRadius = (BASE_RADIUS - 0.5) * 0.55 * 0.75;
   const bottomDisc = new THREE.CircleGeometry(embossRadius, 64);
   const loader = new THREE.TextureLoader();
   const bumpMap = loader.load('/textures/bottom-emboss.png');
@@ -76,16 +76,17 @@ export function createLowerBase(): THREE.Group {
     metalness: 0.3,
     roughness: 0.15,
     bumpMap: bumpMap,
-    bumpScale: 0.3,
+    bumpScale: 0.6,
     polygonOffset: true,
     polygonOffsetFactor: -1,
     polygonOffsetUnits: -1,
   });
 
   const embossAngle = Math.PI / 4; // 45° — midway between the 0° and 90° ridges
-  const embossOffset = BASE_RADIUS * 0.4;
+  const embossOffset = BASE_RADIUS * 0.56;
   const bottomMesh = new THREE.Mesh(bottomDisc, bottomMaterial);
   bottomMesh.rotation.x = Math.PI / 2; // face down
+  bottomMesh.rotation.z = (Math.PI * 3) / 4; // rotate logo 135°
   bottomMesh.position.set(
     Math.cos(embossAngle) * embossOffset,
     -0.101, // just barely below the base bottom (-0.1) to stay flush
