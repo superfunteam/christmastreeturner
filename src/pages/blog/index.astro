@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import { getCollection } from "astro:content";
+
+import fs from "node:fs";
+import { execSync } from "node:child_process";
+
+const posts = (await getCollection("blog"))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Get video file creation date for sidebar label
+const videoPath = "public/video/christmas-tree-turner-mom-and-dad.mp4";
+const videoStat = fs.statSync(videoPath);
+const videoDate = videoStat.birthtime;
+const videoDateLabel = `${videoDate.getMonth() + 1}/${videoDate.getDate()}/${String(videoDate.getFullYear()).slice(2)} Update`;
+
+// Get video duration via ffprobe
+let videoDuration = "";
+try {
+	const secs = parseFloat(execSync(`ffprobe -v error -show_entries format=duration -of csv=p=0 ${videoPath}`).toString().trim());
+	const m = Math.floor(secs / 60);
+	const s = Math.floor(secs % 60);
+	videoDuration = s > 0 ? `${m}m${String(s).padStart(2, "0")}s` : `${m}m`;
+} catch {};
+---
+
+<BaseLayout
+	title="Project Updates and Findings — ChristmasTreeTurner.com"
+	description="Updates, discoveries, and stories from the hunt for the origins of a mechanical Christmas Tree Turner."
+>
+	<SiteHeader />
+
+	<main id="main-content">
+		<div class="mb-8 mt-24">
+			<h1 class="uppercase tracking-tight text-4xl md:text-7xl italic mb-4 text-red" style="font-family: 'Tay Highbeams', sans-serif;">Project Updates and Findings</h1>
+			<p class="text-lg max-w-2xl">Updates, discoveries, and stories from the search.</p>
+		</div>
+
+		<div class="md:grid md:grid-cols-[1fr_320px] gap-12">
+			<!-- Posts -->
+			<div class="flex flex-col gap-8">
+				{posts.map((post) => (
+					<article class="border-b border-border pb-8">
+						<time class="font-mono text-xs tracking-widest uppercase text-muted" datetime={post.data.date.toISOString()}>
+							{post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+						</time>
+						<h2 class="font-display uppercase tracking-widest text-2xl mt-1 mb-2">
+							<a href={`/blog/${post.id}`} class="text-text hover:text-red transition-colors no-underline">
+								{post.data.title}
+							</a>
+						</h2>
+						<p class="text-muted mb-3">{post.data.description}</p>
+						{post.data.tags && (
+							<div class="flex flex-wrap gap-2">
+								{post.data.tags.map((tag) => (
+									<span class="font-mono text-xs tracking-widest uppercase text-muted border border-border px-2 py-0.5">
+										{tag}
+									</span>
+								))}
+							</div>
+						)}
+					</article>
+				))}
+
+				{posts.length === 0 && (
+					<p class="text-muted font-mono text-sm tracking-widest uppercase">No posts yet. Check back soon.</p>
+				)}
+			</div>
+
+			<!-- Sidebar -->
+			<aside class="mt-12 md:mt-0">
+				<div class="md:sticky md:top-20 flex flex-col gap-6">
+				<!-- Video Player -->
+				<div>
+					<div class="flex justify-between items-baseline mb-2">
+						<span class="font-mono text-xs uppercase tracking-widest text-text">Latest Update</span>
+						<span class="font-mono text-[10px] tracking-widest uppercase text-muted">{videoDuration}</span>
+					</div>
+					<video
+						id="sidebar-video"
+						class="w-full cursor-pointer border-4 border-accent"
+						autoplay
+						loop
+						muted
+						playsinline
+						src="/video/christmas-tree-turner-mom-and-dad.mp4"
+					></video>
+					<p class="font-mono text-[10px] tracking-widest uppercase text-muted mt-2">{videoDateLabel}</p>
+					<a href="/videos" class="inline-block mt-2 font-mono text-xs uppercase tracking-widest text-accent hover:text-text transition-colors">All Video Updates &rarr;</a>
+				</div>
+
+				<!-- Newsletter -->
+				<div class="bg-accent text-white p-6">
+					<h2 class="uppercase tracking-tight text-2xl italic mb-3" style="font-family: 'Tay Highbeams', sans-serif;">Friend & Family Updates</h2>
+					<p class="text-white/80 text-sm mb-5 leading-relaxed">
+						We're a small Texas family chasing a big Christmas mystery. If you're a fan of Christmas miracles, old-school detective work, or just want to stay in touch — drop your email and we'll keep you in the loop.
+					</p>
+
+					<form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="grid gap-3">
+						<input type="hidden" name="form-name" value="newsletter" />
+						<div class="hidden" aria-hidden="true">
+							<label for="newsletter-bot">Don't fill this out</label>
+							<input id="newsletter-bot" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+						</div>
+						<div>
+							<label for="newsletter-email" class="sr-only">Email address</label>
+							<input
+								id="newsletter-email"
+								name="email"
+								type="email"
+								required
+								placeholder="your@email.com"
+								class="w-full border-0 p-3 font-serif bg-white text-text text-sm focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+							/>
+						</div>
+						<button
+							type="submit"
+							class="w-full py-3 px-4 bg-white text-accent font-mono text-xs uppercase tracking-widest cursor-pointer hover:bg-white/90 transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+						>
+							Stay in Touch
+						</button>
+					</form>
+
+					<p class="font-mono text-[10px] tracking-widest uppercase text-white/40 mt-4">No spam. Just updates, finds, and the occasional Christmas miracle.</p>
+				</div>
+				</div>
+			</aside>
+		</div>
+		<!-- Footer -->
+		<footer class="border-t border-border pt-16 mt-16">
+			<p class="font-mono text-sm tracking-widest uppercase text-muted">
+				This is a personal historical research project. No commercial use intended.
+			</p>
+			<p class="font-mono text-sm tracking-widest uppercase text-muted mt-2">
+				Help, questions, and press inquiries: clark@superfun.team
+			</p>
+		</footer>
+	</main>
+
+	<!-- Video Modal -->
+	<div id="video-modal" class="fixed inset-0 z-50 bg-black/90 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center" aria-hidden="true">
+		<button id="video-modal-close" type="button" class="absolute top-4 right-4 w-12 h-12 flex items-center justify-center text-white text-3xl bg-transparent border-0 cursor-pointer hover:text-white/70 transition-colors z-10" aria-label="Close video">&times;</button>
+		<video id="video-modal-player" class="max-w-full max-h-[90vh]" controls></video>
+	</div>
+
+	<script>
+		const sidebarVideo = document.getElementById('sidebar-video') as HTMLVideoElement;
+		const videoModal = document.getElementById('video-modal');
+		const videoModalPlayer = document.getElementById('video-modal-player') as HTMLVideoElement;
+		const videoModalClose = document.getElementById('video-modal-close');
+
+		function openVideoModal() {
+			if (!sidebarVideo || !videoModal || !videoModalPlayer) return;
+			sidebarVideo.pause();
+			videoModalPlayer.src = sidebarVideo.src;
+			videoModalPlayer.currentTime = 0;
+			videoModalPlayer.muted = false;
+			videoModal.classList.remove('opacity-0', 'pointer-events-none');
+			videoModal.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden';
+			videoModalPlayer.play();
+		}
+
+		function closeVideoModal() {
+			if (!videoModal || !videoModalPlayer || !sidebarVideo) return;
+			videoModalPlayer.pause();
+			videoModal.classList.add('opacity-0', 'pointer-events-none');
+			videoModal.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
+			videoModalPlayer.src = '';
+			sidebarVideo.play();
+		}
+
+		sidebarVideo?.addEventListener('click', openVideoModal);
+		videoModalClose?.addEventListener('click', closeVideoModal);
+		videoModal?.addEventListener('click', (e) => {
+			if (e.target === videoModal) closeVideoModal();
+		});
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && !videoModal?.classList.contains('opacity-0')) {
+				closeVideoModal();
+			}
+		});
+	</script>
+</BaseLayout>

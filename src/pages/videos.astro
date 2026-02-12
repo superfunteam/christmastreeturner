@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+
+const videos = [
+	{
+		src: "/video/christmas-tree-turner-mom-and-dad.mp4",
+		date: new Date("2026-02-02"),
+	},
+];
+
+// Newest first
+videos.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+function formatLabel(date: Date): string {
+	return `${date.getMonth() + 1}/${date.getDate()}/${String(date.getFullYear()).slice(2)} Update`;
+}
+---
+
+<BaseLayout
+	title="Video Updates — ChristmasTreeTurner.com"
+	description="Video updates from the hunt for the origins of a mechanical Christmas Tree Turner."
+>
+	<SiteHeader />
+
+	<main id="main-content" class="mt-24">
+		<div class="max-w-3xl mx-auto">
+			<h1 class="uppercase tracking-tight text-4xl md:text-7xl italic mb-4 text-red" style="font-family: 'Tay Highbeams', sans-serif;">Video Updates</h1>
+			<p class="text-lg max-w-2xl mb-12">Video updates from the search.</p>
+
+			<div class="flex flex-col gap-12">
+				{videos.map((video, i) => (
+					<>
+						{i > 0 && <hr class="border-t border-border" />}
+						<div>
+							<video
+								class="w-full"
+								controls
+								preload="metadata"
+								src={video.src}
+							></video>
+							<h2 class="font-mono text-sm uppercase tracking-widest mt-3">{formatLabel(video.date)}</h2>
+							<time class="font-mono text-xs tracking-widest uppercase text-muted" datetime={video.date.toISOString()}>
+								{video.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+							</time>
+						</div>
+					</>
+				))}
+			</div>
+
+			<!-- Footer -->
+			<footer class="border-t border-border pt-16 mt-16">
+				<p class="font-mono text-sm tracking-widest uppercase text-muted">
+					This is a personal historical research project. No commercial use intended.
+				</p>
+				<p class="font-mono text-sm tracking-widest uppercase text-muted mt-2">
+					Help, questions, and press inquiries: clark@superfun.team
+				</p>
+			</footer>
+		</div>
+	</main>
+</BaseLayout>

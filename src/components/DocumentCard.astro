@@ -1,0 +1,44 @@
+---
+import { getDocument } from "../data/documents";
+
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+const doc = getDocument(id);
+---
+
+<aside class="not-prose my-8 border border-border bg-white p-5 grid md:grid-cols-[1fr_auto] gap-5 items-start">
+	<div class="grid gap-3">
+		<h4 class="font-display uppercase tracking-widest text-lg m-0">{doc.title}</h4>
+		<dl class="grid gap-1 font-mono text-sm m-0">
+			{Object.entries(doc.metadata).map(([key, value]) => (
+				<div class="flex gap-2"><dt class="text-muted">{key}:</dt><dd>{value}</dd></div>
+			))}
+		</dl>
+		<div class="flex flex-wrap gap-3">
+			<a href={doc.pdfPath} target="_blank" class="bg-accent text-white px-3 py-1.5 font-mono text-xs uppercase tracking-widest hover:opacity-90 transition-opacity no-underline">
+				PDF
+			</a>
+			<a href={doc.plaintextPath} target="_blank" class="bg-accent text-white px-3 py-1.5 font-mono text-xs uppercase tracking-widest hover:opacity-90 transition-opacity no-underline">
+				Plaintext
+			</a>
+		</div>
+		{doc.clue && (
+			<div class="p-2 bg-accent/10 border-l-4 border-accent rounded-r text-sm">
+				<strong class="font-bold">Clue!</strong> {doc.clue}
+			</div>
+		)}
+	</div>
+	{doc.thumbnails[0] && (
+		<a href={doc.pdfPath} target="_blank" class="block w-28 shrink-0">
+			<img
+				src={doc.thumbnails[0]}
+				alt={`${doc.title} page 1`}
+				class="block w-full border border-black/10 rounded-sm shadow-sm bg-white"
+				loading="lazy"
+			/>
+		</a>
+	)}
+</aside>

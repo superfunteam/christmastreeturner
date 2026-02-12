@@ -1,0 +1,60 @@
+---
+import type { Document } from "../data/documents";
+
+interface Props {
+	doc: Document;
+}
+
+const { doc } = Astro.props;
+---
+
+<article class="grid md:grid-cols-3 gap-6 items-start">
+	<div class="grid gap-3">
+		<h3 class="font-display uppercase tracking-widest text-xl">{doc.title}</h3>
+		<dl class="grid gap-1 font-mono text-sm">
+			{Object.entries(doc.metadata).map(([key, value]) => (
+				<div class="flex gap-2"><dt class="text-muted">{key}:</dt><dd>{value}</dd></div>
+			))}
+		</dl>
+		<div class="flex flex-wrap gap-3 mt-2">
+			<a href={doc.pdfPath} target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+				View Full PDF
+			</a>
+			<a href={doc.plaintextPath} target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
+				View as Plaintext
+			</a>
+		</div>
+		{doc.clue && (
+			<div class="mt-4 p-3 bg-accent/10 border-l-4 border-accent rounded-r text-sm">
+				<strong class="font-bold">Clue!</strong> {doc.clue}
+			</div>
+		)}
+	</div>
+
+	<!-- Page Previews - 2/3 width, bleeds right, third page half-cropped -->
+	<div class="md:col-span-2 flex gap-4 items-start">
+		{doc.thumbnails.map((thumb, i) => (
+			<a
+				href={doc.pdfPath}
+				target="_blank"
+				class:list={[
+					"block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95",
+					i === 0 ? "relative hover:rotate-1" : i === 1 ? "hover:-rotate-1" : "hover:rotate-2",
+				]}
+			>
+				{i === 0 && (
+					<>
+						<div class="absolute top-2 left-2 w-full h-full bg-black/5 rounded-sm"></div>
+						<div class="absolute top-1 left-1 w-full h-full bg-black/10 rounded-sm"></div>
+					</>
+				)}
+				<img
+					src={thumb}
+					alt={`${doc.title} page ${i + 1}`}
+					class:list={["block w-full border border-black/10 rounded-sm shadow-sm bg-white", i === 0 && "relative"]}
+					loading="lazy"
+				/>
+			</a>
+		))}
+	</div>
+</article>

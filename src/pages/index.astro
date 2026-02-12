@@ -1,56 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import DocumentCardFull from "../components/DocumentCardFull.astro";
+import { documents } from "../data/documents";
+import { getCollection } from "astro:content";
+
+const latestPosts = (await getCollection("blog"))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+	.slice(0, 5);
 ---
 
 <BaseLayout
 	title="Have You Seen Me? — ChristmasTreeTurner.com"
 	description="A public hunt for the origins of a full-size mechanical Christmas Tree Turner."
 >
-	<!-- Film Banner (Fixed) -->
-	<a href="/film" class="fixed top-0 left-0 right-0 z-50 bg-accent text-white py-2 px-4 md:px-6 flex items-center justify-between gap-3 group">
-		<span class="font-mono text-xs tracking-wider uppercase">Christmas Tree Turner: The Film — Coming Soon...</span>
-		<span class="font-mono text-xs tracking-wider uppercase border border-white/50 px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-accent transition-colors">View</span>
-	</a>
+	<SiteHeader />
 
 	<main id="main-content" class="flex flex-col gap-32">
 		<!-- Hero Section -->
 		<section class="relative overflow-visible">
-			<div class="flex justify-between items-center mt-8 mb-3 relative z-20 italic" style="font-family: 'Tay Highbeams', sans-serif;">
-				<p class="uppercase text-sm md:text-xl tracking-tight text-red">Help a Texas family recover history</p>
-
-				<!-- Desktop Nav -->
-				<nav class="hidden md:flex gap-6 uppercase text-sm md:text-xl tracking-tight">
-					<a href="#overview" class="text-muted hover:text-text transition-colors">Overview</a>
-					<a href="#bounties" class="text-muted hover:text-text transition-colors">Bounties</a>
-					<a href="#faq" class="text-muted hover:text-text transition-colors">FAQs</a>
-					<a href="#merch" class="text-muted hover:text-text transition-colors">Shop</a>
-					<a href="#contact" class="text-muted hover:text-text transition-colors">Contact</a>
-				</nav>
-
-				<!-- Mobile Nav Button -->
-				<button id="mobile-nav-btn" class="md:hidden flex items-center gap-2 p-2 text-text font-mono text-xs uppercase tracking-widest" aria-label="Open menu">
-					<span>Menu</span>
-					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-					</svg>
-				</button>
-			</div>
-
-			<!-- Mobile Nav Overlay -->
-			<div id="mobile-nav" class="fixed inset-0 bg-bg z-50 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
-				<button id="mobile-nav-close" class="absolute top-6 right-6 p-2 text-text" aria-label="Close menu">
-					<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-					</svg>
-				</button>
-				<nav class="flex flex-col items-center gap-6 uppercase text-2xl tracking-tight italic" style="font-family: 'Tay Highbeams', sans-serif;">
-					<a href="#overview" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Overview</a>
-					<a href="#bounties" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Bounties</a>
-					<a href="#faq" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">FAQs</a>
-					<a href="#merch" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Shop</a>
-					<a href="#contact" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Contact</a>
-				</nav>
-			</div>
 			<div class="relative overflow-visible min-h-[280px] md:min-h-0">
 				<h1 class="uppercase text-5xl md:text-[11.5rem] tracking-wider leading-none md:leading-[0.85] my-12 md:my-24 relative z-20 max-w-[55%] md:max-w-3xl md:-ml-2" style="font-family: 'Jukebox Johnny', sans-serif;">Have You Seen Me?</h1>
 				<div class="absolute top-0 right-0 w-3/5 h-full -mr-8 md:-mr-32 overflow-visible bg-transparent pointer-events-none z-30">
@@ -101,6 +70,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 				</div>
 			</div>
 		</section>
+
+		<!-- Wayfinding -->
+		<nav class="grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
+			<a href="#overview" class="group bg-bg p-6 md:p-8 flex flex-col items-center gap-3 text-center no-underline hover:bg-accent transition-colors">
+				<span class="material-symbols-outlined text-muted group-hover:text-white transition-colors" style="font-size: 32px;">smart_display</span>
+				<span class="font-mono text-[10px] md:text-xs uppercase tracking-widest text-muted group-hover:text-white transition-colors">Explainer Video</span>
+			</a>
+			<a href="/blog" class="group bg-bg p-6 md:p-8 flex flex-col items-center gap-3 text-center no-underline hover:bg-accent transition-colors">
+				<span class="material-symbols-outlined text-muted group-hover:text-white transition-colors" style="font-size: 32px;">newspaper</span>
+				<span class="font-mono text-[10px] md:text-xs uppercase tracking-widest text-muted group-hover:text-white transition-colors">Latest Updates</span>
+			</a>
+			<a href="#faq" class="group bg-bg p-6 md:p-8 flex flex-col items-center gap-3 text-center no-underline hover:bg-accent transition-colors">
+				<span class="material-symbols-outlined text-muted group-hover:text-white transition-colors" style="font-size: 32px;">help</span>
+				<span class="font-mono text-[10px] md:text-xs uppercase tracking-widest text-muted group-hover:text-white transition-colors">Frequent Questions</span>
+			</a>
+			<a href="#contact" class="group bg-bg p-6 md:p-8 flex flex-col items-center gap-3 text-center no-underline hover:bg-accent transition-colors">
+				<span class="material-symbols-outlined text-muted group-hover:text-white transition-colors" style="font-size: 32px;">volunteer_activism</span>
+				<span class="font-mono text-[10px] md:text-xs uppercase tracking-widest text-muted group-hover:text-white transition-colors">Get Involved</span>
+			</a>
+		</nav>
 
 		<!-- Christmas Tree Turner Overview -->
 		<section id="overview" class="border-t border-border pt-16 scroll-mt-8">
@@ -225,87 +214,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			<p class="text-lg mb-6 max-w-prose">Primary sources we've found so far. Help us find more.</p>
 
 			<div class="grid gap-8 overflow-hidden -mr-6 md:-mr-10 pr-6 md:pr-10">
-				<!-- Patent Document Card -->
-				<article class="grid md:grid-cols-3 gap-6 items-start">
-					<div class="grid gap-3">
-						<h3 class="font-display uppercase tracking-widest text-xl">U.S. Patent 2,733,032</h3>
-						<dl class="grid gap-1 font-mono text-sm">
-							<div class="flex gap-2"><dt class="text-muted">Year:</dt><dd>1956</dd></div>
-							<div class="flex gap-2"><dt class="text-muted">Title:</dt><dd>Christmas Tree Rotator</dd></div>
-							<div class="flex gap-2"><dt class="text-muted">Pages:</dt><dd>3</dd></div>
-						</dl>
-						<div class="flex flex-wrap gap-3 mt-2">
-							<a href="/docs/US_Patent_2733032.pdf" target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
-								View Full PDF
-							</a>
-							<a href="/docs/US_Patent_2733032.md" target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
-								View as Plaintext
-							</a>
-						</div>
-						<div class="mt-4 p-3 bg-accent/10 border-l-4 border-accent rounded-r text-sm">
-							<strong class="font-bold">Clue!</strong> The original patent makes NO MENTION of the electric motor, music box, or outlets for lights.
-						</div>
-					</div>
-
-					<!-- Page Previews - 2/3 width, bleeds right, third page half-cropped -->
-					<div class="md:col-span-2 flex gap-4 items-start">
-						<a href="/docs/US_Patent_2733032.pdf" target="_blank" class="relative w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:rotate-1">
-							<!-- Shadow pages behind to suggest depth -->
-							<div class="absolute top-2 left-2 w-full h-full bg-black/5 rounded-sm"></div>
-							<div class="absolute top-1 left-1 w-full h-full bg-black/10 rounded-sm"></div>
-							<img src="/docs/thumbnails/US_Patent_2733032-page-1.png" alt="Patent page 1" class="relative block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
-						</a>
-						<a href="/docs/US_Patent_2733032.pdf" target="_blank" class="block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:-rotate-1">
-							<img src="/docs/thumbnails/US_Patent_2733032-page-2.png" alt="Patent page 2" class="block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
-						</a>
-						<a href="/docs/US_Patent_2733032.pdf" target="_blank" class="block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:rotate-2">
-							<img src="/docs/thumbnails/US_Patent_2733032-page-3.png" alt="Patent page 3" class="block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
-						</a>
-					</div>
-				</article>
-
-				<hr class="border-t border-black/10" />
-
-				<!-- Patent Document Card 2 -->
-				<article class="grid md:grid-cols-3 gap-6 items-start">
-					<div class="grid gap-3">
-						<h3 class="font-display uppercase tracking-widest text-xl">U.S. Patent 2,847,175</h3>
-						<dl class="grid gap-1 font-mono text-sm">
-							<div class="flex gap-2"><dt class="text-muted">Year:</dt><dd>1958</dd></div>
-							<div class="flex gap-2"><dt class="text-muted">Title:</dt><dd>Revolving Stand</dd></div>
-							<div class="flex gap-2"><dt class="text-muted">Assignee:</dt><dd>Spincraft, Inc.</dd></div>
-							<div class="flex gap-2"><dt class="text-muted">Pages:</dt><dd>3</dd></div>
-						</dl>
-						<div class="flex flex-wrap gap-3 mt-2">
-							<a href="/docs/US_Patent_2847175.pdf" target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
-								View Full PDF
-							</a>
-							<a href="/docs/US_Patent_2847175.md" target="_blank" class="bg-accent text-white px-4 py-2 font-mono text-sm uppercase tracking-widest hover:opacity-90 transition-opacity">
-								View as Plaintext
-							</a>
-						</div>
-						<div class="mt-4 p-3 bg-accent/10 border-l-4 border-accent rounded-r text-sm">
-							<strong class="font-bold">Clue!</strong> This patent DOES mention illumination, lights, and a music box—filed 2 years after the first!
-						</div>
-					</div>
-
-					<!-- Page Previews - 2/3 width, bleeds right, third page half-cropped -->
-					<div class="md:col-span-2 flex gap-4 items-start">
-						<a href="/docs/US_Patent_2847175.pdf" target="_blank" class="relative w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:rotate-1">
-							<!-- Shadow pages behind to suggest depth -->
-							<div class="absolute top-2 left-2 w-full h-full bg-black/5 rounded-sm"></div>
-							<div class="absolute top-1 left-1 w-full h-full bg-black/10 rounded-sm"></div>
-							<img src="/docs/thumbnails/US_Patent_2847175-page-1.png" alt="Patent page 1" class="relative block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
-						</a>
-						<a href="/docs/US_Patent_2847175.pdf" target="_blank" class="block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:-rotate-1">
-							<img src="/docs/thumbnails/US_Patent_2847175-page-2.png" alt="Patent page 2" class="block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
-						</a>
-						<a href="/docs/US_Patent_2847175.pdf" target="_blank" class="block w-2/5 shrink-0 scale-90 transition-transform duration-200 hover:scale-95 hover:rotate-2">
-							<img src="/docs/thumbnails/US_Patent_2847175-page-3.png" alt="Patent page 3" class="block w-full border border-black/10 rounded-sm shadow-sm bg-white" loading="lazy" />
-						</a>
-					</div>
-				</article>
-			</div>
+			{Object.values(documents).map((doc, i) => (
+				<>
+					{i > 0 && <hr class="border-t border-black/10" />}
+					<DocumentCardFull doc={doc} />
+				</>
+			))}
+		</div>
 		</section>
 
 		<!-- Bounties + FAQ Side by Side -->
@@ -572,19 +487,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<section class="border-t border-border pt-16">
 			<h2 class="uppercase tracking-tight mb-5 text-3xl italic" style="font-family: 'Tay Highbeams', sans-serif;">Updates / Findings Log</h2>
 			<div class="grid gap-4">
-				<div class="grid gap-1 border-b border-border pb-3">
-					<span class="font-mono text-sm uppercase tracking-widest">JAN 22, 2026</span>
-					<span>SpinCraft name confirmed on original label.</span>
-				</div>
-				<div class="grid gap-1 border-b border-border pb-3">
-					<span class="font-mono text-sm uppercase tracking-widest">JAN 14, 2026</span>
-					<span>Patent number 2733032 discovered.</span>
-				</div>
-				<div class="grid gap-1 border-b border-border pb-3">
-					<span class="font-mono text-sm uppercase tracking-widest">DEC 30, 2025</span>
-					<span>Full catalog of photographs and renders completed.</span>
-				</div>
+				{latestPosts.map((post) => (
+					<a href={`/blog/${post.id}`} class="grid gap-1 border-b border-border pb-3 no-underline text-text hover:text-accent transition-colors">
+						<span class="font-mono text-sm uppercase tracking-widest">{post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }).toUpperCase()}</span>
+						<span>{post.data.title}</span>
+					</a>
+				))}
 			</div>
+			<a href="/blog" class="inline-block mt-6 font-mono text-sm uppercase tracking-widest text-accent hover:text-text transition-colors">View All Updates &rarr;</a>
 		</section>
 
 		<!-- Footer -->
@@ -981,42 +891,4 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		cycleGallery('art-gallery', 1500);
 	</script>
 
-	<script>
-		// Mobile nav
-		const mobileNavBtn = document.getElementById('mobile-nav-btn');
-		const mobileNav = document.getElementById('mobile-nav');
-		const mobileNavClose = document.getElementById('mobile-nav-close');
-		const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-		function openNav() {
-			mobileNav?.classList.remove('opacity-0', 'pointer-events-none');
-			mobileNav?.classList.add('opacity-100', 'pointer-events-auto');
-			document.body.style.overflow = 'hidden';
-
-			// Stagger animate links
-			mobileNavLinks.forEach((link, i) => {
-				setTimeout(() => {
-					link.classList.remove('translate-y-4', 'opacity-0');
-					link.classList.add('translate-y-0', 'opacity-100');
-				}, 50 + i * 75);
-			});
-		}
-
-		function closeNav() {
-			mobileNavLinks.forEach((link) => {
-				link.classList.add('translate-y-4', 'opacity-0');
-				link.classList.remove('translate-y-0', 'opacity-100');
-			});
-
-			setTimeout(() => {
-				mobileNav?.classList.add('opacity-0', 'pointer-events-none');
-				mobileNav?.classList.remove('opacity-100', 'pointer-events-auto');
-				document.body.style.overflow = '';
-			}, 150);
-		}
-
-		mobileNavBtn?.addEventListener('click', openNav);
-		mobileNavClose?.addEventListener('click', closeNav);
-		mobileNavLinks.forEach(link => link.addEventListener('click', closeNav));
-	</script>
 </BaseLayout>

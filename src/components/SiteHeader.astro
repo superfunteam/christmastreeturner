@@ -1,0 +1,86 @@
+<!-- Film Banner (Fixed) -->
+<a href="/film" class="fixed top-0 left-0 right-0 z-50 bg-accent text-white py-2 px-4 md:px-6 flex items-center justify-between gap-3 group">
+	<span class="font-mono text-xs tracking-wider uppercase">Christmas Tree Turner: The Film — Coming Soon...</span>
+	<span class="font-mono text-xs tracking-wider uppercase border border-white/50 px-2 py-1 shrink-0 group-hover:bg-white group-hover:text-accent transition-colors">View</span>
+</a>
+
+<!-- Nav Bar -->
+<div class="flex justify-between items-center mt-8 mb-3 relative z-40 italic" style="font-family: 'Tay Highbeams', sans-serif;">
+	<p class="uppercase text-sm md:text-xl tracking-tight text-red">
+		<a href="/" class="text-red no-underline hover:text-red">Help a Texas family recover history</a>
+	</p>
+
+	<!-- Desktop Nav -->
+	<nav class="hidden md:flex gap-6 uppercase text-sm md:text-xl tracking-tight">
+		<a href="/#overview" class="text-muted hover:text-text transition-colors">Overview</a>
+		<a href="/#bounties" class="text-muted hover:text-text transition-colors">Bounties</a>
+		<a href="/#faq" class="text-muted hover:text-text transition-colors">FAQs</a>
+		<a href="/blog" class="text-muted hover:text-text transition-colors">Updates</a>
+		<a href="/#merch" class="text-muted hover:text-text transition-colors">Shop</a>
+		<a href="/#contact" class="text-muted hover:text-text transition-colors">Contact</a>
+	</nav>
+
+	<!-- Mobile Nav Button -->
+	<button id="mobile-nav-btn" class="md:hidden flex items-center gap-2 p-2 text-text font-mono text-xs uppercase tracking-widest" aria-label="Open menu">
+		<span>Menu</span>
+		<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+		</svg>
+	</button>
+</div>
+
+<!-- Mobile Nav Overlay -->
+<div id="mobile-nav" class="fixed inset-0 bg-bg z-50 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
+	<button id="mobile-nav-close" class="absolute top-6 right-6 p-2 text-text" aria-label="Close menu">
+		<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+		</svg>
+	</button>
+	<nav class="flex flex-col items-center gap-6 uppercase text-2xl tracking-tight italic" style="font-family: 'Tay Highbeams', sans-serif;">
+		<a href="/#overview" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Overview</a>
+		<a href="/#bounties" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Bounties</a>
+		<a href="/#faq" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">FAQs</a>
+		<a href="/blog" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Updates</a>
+		<a href="/#merch" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Shop</a>
+		<a href="/#contact" class="mobile-nav-link text-text hover:text-accent transition-all duration-300 translate-y-4 opacity-0">Contact</a>
+	</nav>
+</div>
+
+<script>
+	// Mobile nav
+	const mobileNavBtn = document.getElementById('mobile-nav-btn');
+	const mobileNav = document.getElementById('mobile-nav');
+	const mobileNavClose = document.getElementById('mobile-nav-close');
+	const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+	function openNav() {
+		mobileNav?.classList.remove('opacity-0', 'pointer-events-none');
+		mobileNav?.classList.add('opacity-100', 'pointer-events-auto');
+		document.body.style.overflow = 'hidden';
+
+		// Stagger animate links
+		mobileNavLinks.forEach((link, i) => {
+			setTimeout(() => {
+				link.classList.remove('translate-y-4', 'opacity-0');
+				link.classList.add('translate-y-0', 'opacity-100');
+			}, 50 + i * 75);
+		});
+	}
+
+	function closeNav() {
+		mobileNavLinks.forEach((link) => {
+			link.classList.add('translate-y-4', 'opacity-0');
+			link.classList.remove('translate-y-0', 'opacity-100');
+		});
+
+		setTimeout(() => {
+			mobileNav?.classList.add('opacity-0', 'pointer-events-none');
+			mobileNav?.classList.remove('opacity-100', 'pointer-events-auto');
+			document.body.style.overflow = '';
+		}, 150);
+	}
+
+	mobileNavBtn?.addEventListener('click', openNav);
+	mobileNavClose?.addEventListener('click', closeNav);
+	mobileNavLinks.forEach(link => link.addEventListener('click', closeNav));
+</script>

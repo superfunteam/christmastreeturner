@@ -1,5 +1,7 @@
 ---
 // Interactive 3D model viewer - procedural Three.js model of the Spincraft Heirloom Christmas Tree Turner
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
 ---
 
 <!doctype html>
@@ -93,26 +95,14 @@
 				to { transform: rotate(360deg); }
 			}
 
-			/* Back link */
-			.back-link {
+			/* Site header overlay */
+			.site-header-wrap {
 				position: fixed;
-				top: 1.25rem;
-				left: 1.25rem;
+				top: 0;
+				left: 0;
+				right: 0;
 				z-index: 20;
-				color: var(--text);
-				text-decoration: none;
-				font-size: 12px;
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-				font-family: 'IBM Plex Mono', monospace;
-				background: rgba(248, 247, 242, 0.85);
-				padding: 6px 12px;
-				border: 1px solid var(--border);
-				transition: background 0.2s;
-			}
-
-			.back-link:hover {
-				background: rgba(248, 247, 242, 1);
+				padding: 0 1.25rem;
 			}
 
 			/* Control bar */
@@ -212,9 +202,8 @@
 					max-width: none;
 				}
 
-				.back-link {
-					top: 0.75rem;
-					left: 0.75rem;
+				.site-header-wrap {
+					padding: 0 0.75rem;
 				}
 			}
 		</style>
@@ -225,8 +214,10 @@
 			<div class="spinner"></div>
 		</div>
 
-		<!-- Back link -->
-		<a href="/" class="back-link">&larr; Back to Home</a>
+		<!-- Site Header -->
+		<div class="site-header-wrap">
+			<SiteHeader />
+		</div>
 
 		<!-- 3D Viewer container -->
 		<div id="viewer-container"></div>

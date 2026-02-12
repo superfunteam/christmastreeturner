@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# reference files (local only)
+ref/
+
+# original uncompressed video
+public/video/*-original.mp4
